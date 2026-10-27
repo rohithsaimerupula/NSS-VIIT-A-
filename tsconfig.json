@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    /* ─── Language and environment ─────────────────────────────── */
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    /* ─── Module system ────────────────────────────────────────── */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+
+    /* ─── Emit ─────────────────────────────────────────────────── */
+    "noEmit": true,
+
+    /* ─── JSX ──────────────────────────────────────────────────── */
+    "jsx": "react-jsx",
+
+    /* ─── Path aliases ─────────────────────────────────────────── */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* ─── Strict type checking ─────────────────────────────────── */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    /* ─── Interop ──────────────────────────────────────────────── */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* ─── Incremental compilation cache ────────────────────────── */
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo"
+  },
+  "include": ["src", "tests", "vite.config.ts", "vitest.config.ts", "eslint.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}

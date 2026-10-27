@@ -1,0 +1,147 @@
+/*
+ * NSS VIIT (A) — Global Styles
+ *
+ * Design token source of truth.
+ * All color, typography and spacing decisions flow from here.
+ * Documented in: 04_UI_UX_Brief_NSS_VIIT_A.docx §2
+ */
+
+@import "tailwindcss";
+
+/* ─── Design Tokens (CSS Custom Properties) ─────────────────────────
+   Source: UI/UX Brief §2 — Design tokens
+   All Tailwind utilities are extended via these variables so that
+   a single change here propagates everywhere.
+   ──────────────────────────────────────────────────────────────── */
+@theme {
+  /* Brand palette */
+  --color-ivory:    #F5F1E8; /* Primary page background and editorial surfaces    */
+  --color-forest:   #1A3C29; /* Brand color, navigation emphasis, primary actions */
+  --color-gold:     #C3A66B; /* Restrained accent for highlights, rules, details  */
+  --color-charcoal: #292D2A; /* Primary text and strong contrast                  */
+  --color-white:    #FFFFFF; /* Forms, dashboards and content surfaces             */
+
+  /* Semantic aliases */
+  --color-bg-primary:    var(--color-ivory);
+  --color-bg-surface:    var(--color-white);
+  --color-text-primary:  var(--color-charcoal);
+  --color-text-inverse:  var(--color-ivory);
+  --color-brand-primary: var(--color-forest);
+  --color-brand-accent:  var(--color-gold);
+
+  /* ── Typography ──────────────────────────────────────────────────
+     UI/UX Brief §2: "Editorial serif headings with clear sans-serif body/UI font."
+     Actual font families are set below; update if the font load strategy changes.
+     ────────────────────────────────────────────────────────────── */
+  --font-heading: 'Playfair Display', 'Georgia', serif;
+  --font-body:    'Inter', 'system-ui', sans-serif;
+
+  /* ── Motion (UI/UX Brief §5) ─────────────────────────────────────
+     Duration vocabulary used by all animation utilities.
+     Must be paired with prefers-reduced-motion overrides (see below).
+     ────────────────────────────────────────────────────────────── */
+  --duration-micro:     150ms; /* Micro interactions: hover, focus rings           */
+  --duration-drawer:    220ms; /* Drawer / modal open-close                        */
+  --duration-reveal:    500ms; /* Editorial section reveals                        */
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Base reset and defaults ────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Prevent font-size inflation on mobile (iOS Safari). */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Smooth scroll for same-page anchor links. */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Prevent horizontal overflow. */
+  overflow-x: hidden;
+}
+
+/* ─── Focus management (WCAG 2.2 AA — UI/UX Brief §8) ───────────── */
+/* Show a visible focus ring for keyboard users; hide for pointer users. */
+:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remove default focus outline only for mouse interactions. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Typography hierarchy ──────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-forest);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ─── Reduced motion (UI/UX Brief §5, PRD §7) ───────────────────── */
+/*
+  Replace motion-based transitions with simple fades or instant
+  state changes when the user has requested reduced motion.
+  No animation should block content or user input regardless.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Utility: visually hidden (screen-reader accessible) ────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

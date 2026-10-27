@@ -1,0 +1,45 @@
+{
+  "name": "nss-viit-a",
+  "private": true,
+  "version": "0.1.0",
+  "description": "NSS VIIT (A) — Official website and digital platform for the NSS unit of Vignan's Institute of Information Technology (Autonomous), Visakhapatnam.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.0.0",
+    "jsdom": "^26.1.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.29.1",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  }
+}

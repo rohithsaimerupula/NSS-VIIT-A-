@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#1A3C29" />
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#C3A66B" stroke-width="4" />
+  <text x="50" y="58" font-size="24" font-weight="bold" fill="#F5F1E8" text-anchor="middle" font-family="serif">NSS</text>
+</svg>
