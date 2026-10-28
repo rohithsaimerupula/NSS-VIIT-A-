@@ -30,11 +30,11 @@
   --color-brand-accent:  var(--color-gold);
 
   /* ── Typography ──────────────────────────────────────────────────
-     UI/UX Brief §2: "Editorial serif headings with clear sans-serif body/UI font."
-     Actual font families are set below; update if the font load strategy changes.
+     UI/UX Brief §2: Editorial serif headings with clear sans-serif body/UI font.
+     Approved Headings: Playfair Display. Approved Body/UI: Plus Jakarta Sans.
      ────────────────────────────────────────────────────────────── */
-  --font-heading: 'Playfair Display', 'Georgia', serif;
-  --font-body:    'Inter', 'system-ui', sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* ── Motion (UI/UX Brief §5) ─────────────────────────────────────
      Duration vocabulary used by all animation utilities.
@@ -88,32 +88,29 @@ body {
   outline: none;
 }
 
-/* ─── Typography hierarchy ──────────────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-charcoal);
-  margin: 0;
-}
+/* ─── Typography hierarchy & Base Layer ──────────────────────────── */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: inherit;
+    margin: 0;
+  }
 
-p {
-  margin: 0;
-}
+  p {
+    margin: 0;
+  }
 
-a {
-  color: var(--color-forest);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-a:hover {
-  color: var(--color-gold);
-}
-
-img, video, svg {
-  display: block;
-  max-width: 100%;
+  img, video, svg {
+    display: block;
+    max-width: 100%;
+  }
 }
 
 /* ─── Reduced motion (UI/UX Brief §5, PRD §7) ───────────────────── */

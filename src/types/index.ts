@@ -14,15 +14,47 @@
  */
 
 /** ─── User Roles ───────────────────────────────────────────────────
- * Documented in PRD §4 and TRD §5.
- * The five roles are strictly separated; holding one does not imply another.
+ * Documented in PRD §4, TRD §5, and Addendum §5.
+ * Strictly separated; holding one does not imply another.
  */
 export type UserRole =
-  | 'website_admin'       // Public pages, content, homepage, gallery, announcements.
-  | 'operations_admin'    // Volunteer approval, events, attendance, hours, certificates.
-  | 'core_team'           // Tasks, proposals, submissions, meetings. Scoped individually.
-  | 'volunteer'           // Own events, attendance, hours, resources, certificates.
-  | 'alumni'              // Read-only own history and issued certificates.
+  | 'main_website_admin'    // Public pages, content, homepage, gallery, announcements.
+  | 'nss_operations_admin' // Volunteer approval, events, attendance, hours, certificates.
+  | 'my_bharat_coordinator'// (Proposed) MY Bharat youth cell operations, events, attendance.
+  | 'faculty_po_reviewer'  // (Proposed) Programme Officer / Faculty review & strategic audit.
+  | 'core_team'            // Tasks, proposals, submissions, meetings. Scoped individually.
+  | 'volunteer'            // Own events, attendance, hours, resources, certificates.
+  | 'alumni'               // Read-only own history and issued certificates.
+
+/** ─── Volunteer Enrollment Tracks ─────────────────────────────────
+ * Single registration workflow track options (PRD §6.1, Addendum §3.1).
+ */
+export type VolunteerTrack =
+  | 'nss_only'
+  | 'my_bharat_only'
+  | 'both'
+
+/** ─── Event Initiative Types ──────────────────────────────────────
+ * Event classifications (PRD §6.2, Addendum §4.1).
+ */
+export type EventInitiative =
+  | 'nss'
+  | 'my_bharat'
+  | 'joint'
+
+/** ─── Core Team Designation Types ─────────────────────────────────
+ * 28 Core Team members: 24 NSS Wing, 4 MY Bharat Cell (PRD §3, Addendum §1.2).
+ */
+export type CoreTeamDesignation =
+  | 'nss_wing'
+  | 'my_bharat_cell'
+
+/** ─── Service Hour Categories ─────────────────────────────────────
+ * Strictly distinct ledgers; joint events never double-counted (PRD §6.3, Addendum §4.3).
+ */
+export type ServiceHourCategory =
+  | 'nss_hours'
+  | 'my_bharat_hours'
 
 /** ─── Volunteer Application Status ────────────────────────────────
  * State model from Web Flow §10 and Backend Schema §5.

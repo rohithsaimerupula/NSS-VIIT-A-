@@ -1,11 +1,10 @@
-/**
- * NSS VIIT (A) — Pages barrel
- *
- * Page views according to PRD §5 and Application Web Flow:
- * - Public: Home, About, Events, Calendar, Gallery, Our Team, Volunteer info, Heritage/Resources, Announcements, Contact, Search, Impact Reports
- * - Portals: Website Admin, Operations Admin, Core Team, Volunteer/Alumni
- *
- * Implemented in Phase 2 and subsequent phases.
- */
-
-export {}
+export { HomePage } from './HomePage'
+export { AboutPage } from './AboutPage'
+export { MyBharatPage } from './MyBharatPage'
+export { EventsPage } from './EventsPage'
+export { EventDetailPage } from './EventDetailPage'
+export { TeamPage } from './TeamPage'
+export { GalleryPage } from './GalleryPage'
+export { ResourcesPage } from './ResourcesPage'
+export { ContactPage } from './ContactPage'
+export { VolunteerInfoPage } from './VolunteerInfoPage'
