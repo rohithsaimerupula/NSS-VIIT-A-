@@ -107,12 +107,12 @@ export function HeroCarousel(): ReactElement {
       onKeyDown={handleKeyDown}
       onMouseEnter={() => { setIsHovered(true); }}
       onMouseLeave={() => { setIsHovered(false); }}
-      className="relative min-h-[620px] sm:min-h-[680px] lg:min-h-[720px] bg-[#1A3C29] text-[#F5F1E8] flex flex-col justify-between overflow-hidden border-b-4 border-[#C3A66B]"
+      className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] bg-[#F5F1E8] text-[#292D2A] flex flex-col justify-between overflow-hidden border-b border-[#292D2A]/10"
       aria-roledescription="carousel"
       aria-label="NSS VIIT (A) Highlighted Initiatives Carousel"
       tabIndex={0}
     >
-      {/* Background Photographic Image with Responsive Fade & Dark Institutional Overlay */}
+      {/* Background Photographic Image with Cross-Fade & Warm Ivory Gradient Overlay */}
       {HERO_SLIDES.map((slide, index) => {
         const isActive = index === currentSlideIndex
         return (
@@ -126,16 +126,17 @@ export function HeroCarousel(): ReactElement {
             <img
               src={slide.imageUrl}
               alt={slide.imageAlt}
-              className="w-full h-full object-cover object-center transform scale-105 motion-safe:transition-transform motion-safe:duration-7000"
+              className="w-full h-full object-cover object-center lg:object-[center_right] transform scale-105 motion-safe:transition-transform motion-safe:duration-7000"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
-            {/* Multi-layered dark forest-green & vignette gradient for WCAG AAA contrast */}
+            {/* Warm ivory directional gradient: solid/opaque on the text side (left), transitioning to soft/transparent over the photo (right) */}
             <div
-              className="absolute inset-0 bg-gradient-to-r from-[#1A3C29]/95 via-[#1A3C29]/85 to-[#1A3C29]/75"
+              className="absolute inset-0 bg-gradient-to-r from-[#F5F1E8] via-[#F5F1E8]/90 sm:via-[#F5F1E8]/80 to-[#F5F1E8]/20"
               aria-hidden="true"
             />
+            {/* Vertical subtle scrim for mobile where text is stacked above image */}
             <div
-              className="absolute inset-0 bg-gradient-to-t from-[#1A3C29] via-transparent to-[#1A3C29]/60"
+              className="absolute inset-0 bg-gradient-to-t from-[#F5F1E8] via-[#F5F1E8]/60 to-transparent sm:hidden"
               aria-hidden="true"
             />
           </div>
@@ -144,21 +145,21 @@ export function HeroCarousel(): ReactElement {
 
       {/* Subtle geometric pattern layer */}
       <div
-        className="absolute inset-0 opacity-15 bg-[radial-gradient(#C3A66B_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"
+        className="absolute inset-0 opacity-20 bg-[radial-gradient(#C3A66B_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"
         aria-hidden="true"
       />
 
       {/* Top Alignment Banner inside Hero */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#F5F1E8]/15 pb-4">
+      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#292D2A]/10 pb-4">
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#C3A66B] animate-pulse" aria-hidden="true" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#C3A66B]">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#1A3C29]">
               {currentSlide.accentBadge}
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F5F1E8]/10 border border-[#C3A66B]/40 text-xs font-semibold tracking-wider text-[#F5F1E8]/90">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#C3A66B]/40 text-xs font-semibold tracking-wider text-[#1A3C29]/80 shadow-xs backdrop-blur-xs">
             <span>Ministry of Youth Affairs &amp; Sports &bull; Govt of India</span>
           </div>
         </div>
@@ -166,27 +167,27 @@ export function HeroCarousel(): ReactElement {
 
       {/* Central Storytelling Content */}
       <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 my-auto">
-        <div className="max-w-3xl space-y-6 text-left">
+        <div className="max-w-2xl lg:max-w-3xl space-y-6 text-left">
           {/* Slide Theme Tag */}
-          <div className="inline-block px-3.5 py-1 rounded-full bg-[#C3A66B]/20 text-[#C3A66B] text-xs font-bold uppercase tracking-widest border border-[#C3A66B]/50 backdrop-blur-xs">
+          <div className="inline-block px-3.5 py-1 rounded-full bg-[#1A3C29]/10 text-[#1A3C29] text-xs font-bold uppercase tracking-widest border border-[#1A3C29]/20 backdrop-blur-xs">
             {currentSlide.themeTitle}
           </div>
 
           {/* Headline in Playfair Display */}
           <h1
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-[#F5F1E8] !text-[#F5F1E8]"
-            style={{ fontFamily: 'var(--font-heading)', color: '#F5F1E8' }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-[#1A3C29] !text-[#1A3C29]"
+            style={{ fontFamily: 'var(--font-heading)', color: '#1A3C29' }}
           >
             {currentSlide.headline}
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl font-semibold text-[#C3A66B] leading-snug">
+          <p className="text-lg sm:text-xl font-semibold text-[#1A3C29] leading-snug">
             {currentSlide.subheading}
           </p>
 
           {/* Detailed Narrative */}
-          <p className="text-sm sm:text-base text-[#F5F1E8]/90 font-normal leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-[#292D2A]/85 font-normal leading-relaxed max-w-2xl">
             {currentSlide.description}
           </p>
 
@@ -194,15 +195,15 @@ export function HeroCarousel(): ReactElement {
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <Link
               to="/events"
-              className="px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#C3A66B] !text-[#1A3C29] hover:bg-white hover:!text-[#1A3C29] transition-all duration-200 shadow-lg text-center focus:outline-none focus:ring-2 focus:ring-white"
-              style={{ color: '#1A3C29' }}
+              className="px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#1A3C29] !text-[#F5F1E8] hover:bg-[#C3A66B] hover:!text-[#1A3C29] transition-all duration-200 shadow-md text-center focus:outline-none focus:ring-2 focus:ring-[#1A3C29]"
+              style={{ color: '#F5F1E8' }}
             >
               Explore Public Activities &rarr;
             </Link>
             <Link
               to="/my-bharat"
-              className="px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-transparent !text-[#F5F1E8] border-2 border-[#C3A66B] hover:bg-[#C3A66B] hover:!text-[#1A3C29] transition-all duration-200 text-center focus:outline-none focus:ring-2 focus:ring-[#C3A66B]"
-              style={{ color: '#F5F1E8' }}
+              className="px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-white/80 !text-[#1A3C29] border-2 border-[#1A3C29]/40 hover:bg-[#1A3C29] hover:!text-[#F5F1E8] transition-all duration-200 text-center shadow-xs focus:outline-none focus:ring-2 focus:ring-[#1A3C29]"
+              style={{ color: '#1A3C29' }}
             >
               Mera Yuva Bharat Youth Cell
             </Link>
@@ -211,11 +212,11 @@ export function HeroCarousel(): ReactElement {
       </div>
 
       {/* Bottom Carousel Controls, Slide Indicators & Pause Toggle */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-4 border-t border-[#F5F1E8]/15">
+      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-4 border-t border-[#292D2A]/10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Left: Slide Index & Indicators */}
           <div className="flex items-center gap-3">
-            <span className="text-xs font-mono font-bold text-[#C3A66B]" aria-live="polite">
+            <span className="text-xs font-mono font-bold text-[#1A3C29]" aria-live="polite">
               0{currentSlideIndex + 1} / 0{totalSlides}
             </span>
 
@@ -230,8 +231,8 @@ export function HeroCarousel(): ReactElement {
                     aria-selected={isActive}
                     aria-label={`Go to slide ${String(idx + 1)}: ${slide.themeTitle}`}
                     onClick={() => { setCurrentSlideIndex(idx); }}
-                    className={`h-2 transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#C3A66B] cursor-pointer ${
-                      isActive ? 'w-8 bg-[#C3A66B]' : 'w-2 bg-[#F5F1E8]/40 hover:bg-[#F5F1E8]/70'
+                    className={`h-2 transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1A3C29] cursor-pointer ${
+                      isActive ? 'w-8 bg-[#1A3C29]' : 'w-2 bg-[#292D2A]/25 hover:bg-[#292D2A]/50'
                     }`}
                   />
                 )
@@ -241,14 +242,14 @@ export function HeroCarousel(): ReactElement {
 
           {/* Right: Previous / Next Controls and Pause/Play Toggle */}
           <div className="flex items-center gap-3">
-            <span className="text-[11px] text-[#F5F1E8]/60 hidden md:inline">
+            <span className="text-[11px] text-[#292D2A]/65 hidden md:inline">
               Demonstration archival photography &bull; Authentic VIIT NSS archives
             </span>
 
             <button
               type="button"
               onClick={() => { setIsPaused(!isPaused); }}
-              className="p-2 rounded-full bg-[#F5F1E8]/10 hover:bg-[#F5F1E8]/20 border border-[#F5F1E8]/20 text-[#F5F1E8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3A66B] cursor-pointer"
+              className="p-2 rounded-full bg-white/80 hover:bg-white border border-[#292D2A]/15 text-[#1A3C29] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A3C29] shadow-xs cursor-pointer"
               aria-label={isPaused ? 'Resume automatic slide rotation' : 'Pause automatic slide rotation'}
               title={isPaused ? 'Resume Carousel' : 'Pause Carousel'}
             >
@@ -266,7 +267,7 @@ export function HeroCarousel(): ReactElement {
             <button
               type="button"
               onClick={goToPrevSlide}
-              className="p-2 rounded-full bg-[#F5F1E8]/10 hover:bg-[#F5F1E8]/20 border border-[#F5F1E8]/20 text-[#F5F1E8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3A66B] cursor-pointer"
+              className="p-2 rounded-full bg-white/80 hover:bg-white border border-[#292D2A]/15 text-[#1A3C29] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A3C29] shadow-xs cursor-pointer"
               aria-label="Previous slide"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
@@ -277,7 +278,7 @@ export function HeroCarousel(): ReactElement {
             <button
               type="button"
               onClick={goToNextSlide}
-              className="p-2 rounded-full bg-[#F5F1E8]/10 hover:bg-[#F5F1E8]/20 border border-[#F5F1E8]/20 text-[#F5F1E8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C3A66B] cursor-pointer"
+              className="p-2 rounded-full bg-white/80 hover:bg-white border border-[#292D2A]/15 text-[#1A3C29] transition-colors focus:outline-none focus:ring-2 focus:ring-[#1A3C29] shadow-xs cursor-pointer"
               aria-label="Next slide"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
