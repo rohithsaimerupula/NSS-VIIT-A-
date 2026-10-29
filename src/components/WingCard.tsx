@@ -9,7 +9,7 @@ interface WingCardProps {
 
 export function WingCard({ wing }: WingCardProps): ReactElement {
   return (
-    <article className="bg-white rounded-2xl border border-[#292D2A]/10 p-7 shadow-sm hover:border-[#C3A66B] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+    <article className="bg-white rounded-2xl border border-[#292D2A]/10 p-7 shadow-sm hover-lift flex flex-col justify-between group">
       <div className="space-y-4">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <InitiativeBadge initiative={wing.initiative} size="sm" />

@@ -1,106 +1,176 @@
 import type { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
+import { MapPin, Mail, Globe, ExternalLink, Shield } from 'lucide-react'
+import { siteConfig } from '../config/siteConfig'
+import { footerLinks } from '../config/navigation'
 
 export function PublicFooter(): ReactElement {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="bg-[#1A3C29] text-[#F5F1E8] border-t-2 border-[#C3A66B]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer id="contact" className="bg-forest-950 text-ivory-100 border-t-2 border-gold-500/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
+          
           {/* Identity & Motto */}
-          <div className="space-y-4">
+          <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#F5F1E8] text-[#1A3C29] font-serif font-bold text-sm flex items-center justify-center border border-[#C3A66B]">
-                NSS
+              <div className="p-1.5 bg-white rounded-full shrink-0">
+                <img
+                  src={siteConfig.logos.nss}
+                  alt="NSS Crest"
+                  className="w-10 h-10 object-contain"
+                  width="40"
+                  height="40"
+                />
               </div>
-              <h3 className="text-xl font-bold font-serif text-[#F5F1E8]">
-                NSS VIIT (A)
-              </h3>
+              <div>
+                <h3 className="font-serif text-lg font-bold text-ivory-50 tracking-tight">
+                  NSS VIIT (A)
+                </h3>
+                <p className="text-[11px] text-gold-400 font-semibold tracking-wider uppercase">
+                  Not Me, But You
+                </p>
+              </div>
             </div>
-            <p className="text-[#C3A66B] font-serif text-sm italic font-semibold">
-              &ldquo;NOT ME, BUT YOU&rdquo;
+
+            <p className="text-xs sm:text-sm text-ivory-300 leading-relaxed font-normal">
+              National Service Scheme at Vignan's Institute of Information Technology brings student engineering minds into active service for rural welfare, ecological conservation, and civic duty.
             </p>
-            <p className="text-xs text-[#F5F1E8]/80 leading-relaxed">
-              Official digital platform of the National Service Scheme Unit and MY Bharat Youth Cell at Vignan's Institute of Information Technology (Autonomous), Duvvada, Visakhapatnam.
-            </p>
+
+            <div className="pt-2 flex items-center gap-3">
+              <img
+                src={siteConfig.logos.viit}
+                alt="VIIT"
+                className="h-6 w-auto object-contain brightness-110"
+              />
+              <span className="text-forest-700">•</span>
+              <img
+                src={siteConfig.logos.myBharat}
+                alt="My Bharat"
+                className="h-5 w-auto object-contain brightness-110"
+              />
+            </div>
           </div>
 
-          {/* Institutional Navigation */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-              Quick Links
+          {/* Quick Navigation */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="font-serif text-xs font-semibold uppercase tracking-wider text-gold-400 border-b border-forest-800 pb-2">
+              Navigation
             </h4>
-            <ul className="space-y-2 text-xs text-[#F5F1E8]/80">
+            <ul className="space-y-2 text-xs">
+              {footerLinks.navigation.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.to}
+                    className="text-ivory-300 hover:text-gold-300 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link to="/about" className="hover:text-[#C3A66B] transition-colors">About NSS VIIT (A)</Link>
+                <Link
+                  to="/volunteer"
+                  className="text-ivory-300 hover:text-gold-300 transition-colors"
+                >
+                  Volunteer Induction
+                </Link>
               </li>
               <li>
-                <Link to="/my-bharat" className="hover:text-[#C3A66B] transition-colors">MY Bharat Youth Cell</Link>
-              </li>
-              <li>
-                <Link to="/events" className="hover:text-[#C3A66B] transition-colors">Events & Activities</Link>
-              </li>
-              <li>
-                <Link to="/team" className="hover:text-[#C3A66B] transition-colors">Our Team (28 Members)</Link>
-              </li>
-              <li>
-                <Link to="/resources" className="hover:text-[#C3A66B] transition-colors">Guidelines & Resources</Link>
-              </li>
-              <li>
-                <Link to="/gallery" className="hover:text-[#C3A66B] transition-colors">Photo Gallery</Link>
-              </li>
-              <li>
-                <Link to="/volunteer" className="hover:text-[#C3A66B] transition-colors">Volunteer Induction</Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-[#C3A66B] transition-colors">Contact Secretariat</Link>
+                <Link
+                  to="/contact"
+                  className="text-ivory-300 hover:text-gold-300 transition-colors"
+                >
+                  Contact Secretariat
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Operational Boundaries */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-              Governance & Policies
+          {/* Useful Public Links */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-serif text-xs font-semibold uppercase tracking-wider text-gold-400 border-b border-forest-800 pb-2">
+              Public & National Portals
             </h4>
-            <ul className="space-y-2 text-xs text-[#F5F1E8]/80">
-              <li>Autonomous Unit Governance</li>
-              <li>Privacy-First Volunteer Protection</li>
-              <li>Zero Double-Counting Service Hours</li>
-              <li>Pre-Approved Media & Consent Policy</li>
-              <li>Closed Development Mode Active</li>
-              <li className="pt-1 text-[#C3A66B]/90 font-medium">No SAC Integration (Strict Exclusion)</li>
+            <ul className="space-y-2 text-xs">
+              {footerLinks.externalPortals.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ivory-300 hover:text-gold-300 transition-colors inline-flex items-center gap-1.5"
+                  >
+                    <span>{link.label}</span>
+                    <ExternalLink className="w-3 h-3 text-gold-500/70" />
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
 
-          {/* Campus Location & Contacts */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-              Campus Location
-            </h4>
-            <div className="text-xs text-[#F5F1E8]/80 space-y-1.5 leading-relaxed">
-              <p className="font-semibold text-[#F5F1E8]">
-                Vignan's Institute of Information Technology (A)
-              </p>
-              <p>Beside VSEZ, Vadlapudi Post, Duvvada</p>
-              <p>Visakhapatnam, Andhra Pradesh — 530049</p>
-              <p className="pt-2 text-[#C3A66B]">
-                Email: <span className="text-[#F5F1E8]">nss@vignaniit.edu.in</span>
-              </p>
+            <div className="pt-2 text-xs">
+              <span className="text-[11px] font-semibold text-ivory-400 uppercase tracking-wider block mb-1">
+                Official Socials
+              </span>
+              <span className="text-ivory-400/80 text-[11px] italic">
+                Instagram handle: Pending official notification
+              </span>
             </div>
           </div>
+
+          {/* Institutional Contact Details */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-serif text-xs font-semibold uppercase tracking-wider text-gold-400 border-b border-forest-800 pb-2">
+              Institutional Contact
+            </h4>
+            <div className="space-y-2.5 text-xs text-ivory-200">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0 mt-0.5" />
+                <div className="leading-relaxed">
+                  <p className="font-semibold text-ivory-100">{siteConfig.institution.fullName}</p>
+                  <p className="text-ivory-300">{siteConfig.institution.addressLine1}</p>
+                  <p className="text-ivory-300">{siteConfig.institution.addressLine2}</p>
+                  <p className="text-ivory-300">
+                    {siteConfig.institution.city}, {siteConfig.institution.state} – {siteConfig.institution.pincode}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <Globe className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+                <a
+                  href={siteConfig.institution.officialWebsiteUrl || 'https://vignaniit.edu.in'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ivory-200 hover:text-gold-300 underline"
+                >
+                  vignaniit.edu.in
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+                <span className="text-ivory-300">nss@vignaniit.edu.in</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-[#F5F1E8]/15 flex flex-col sm:flex-row items-center justify-between text-xs text-[#F5F1E8]/60 gap-4">
-          <p>
-            &copy; {new Date().getFullYear()} NSS VIIT (A). All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
+        {/* Clean Copyright & Identity Strip */}
+        <div className="mt-12 pt-6 border-t border-forest-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-ivory-400">
+          <div className="flex items-center gap-2">
+            <Shield className="w-3.5 h-3.5 text-gold-500 shrink-0" />
+            <p>© {currentYear} NSS VIIT (A) • Vignan's Institute of Information Technology (Autonomous) • Affiliated to JNTUGV, Vizianagaram</p>
+          </div>
+          <div className="flex items-center gap-4 text-ivory-400">
             <span>Primary Identity: NSS VIIT (A)</span>
-            <span>&bull;</span>
-            <span>Integrated MY Bharat Initiative</span>
+            <span>•</span>
+            <span>Integrated MY Bharat Youth Cell</span>
           </div>
         </div>
+
       </div>
     </footer>
   )

@@ -1,180 +1,255 @@
-import { useState, useEffect, type ReactElement } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { TeamCard } from '@/components/TeamCard'
-import { Breadcrumb } from '@/components/Breadcrumb'
-import { CORE_TEAM_STRUCTURE } from '@/lib/data'
-import type { CoreTeamDesignation } from '@/types'
+import { useEffect, type ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SectionHeading } from '../components/ui/SectionHeading';
+import { BackButton } from '../components/ui/BackButton';
+import { leadershipTeam } from '../config/contentConfig';
+import { PlaceholderNotice } from '../components/ui/PlaceholderNotice';
+import { Shield, AlertCircle, Users, Sparkles, UserCheck } from 'lucide-react';
+import { ClosedRegistrationBanner } from '../components/ClosedRegistrationBanner';
 
 export function TeamPage(): ReactElement {
-  const [searchParams] = useSearchParams()
-  const [filter, setFilter] = useState<'all' | CoreTeamDesignation>('all')
-  const [searchQuery, setSearchQuery] = useState('')
+  const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'NSS Core Team (28 Members) | NSS VIIT (A)'
-  }, [])
+    document.title = 'Our Team — 28 Member Institutional Roster | NSS VIIT (A)';
+  }, []);
 
-  useEffect(() => {
-    const filterParam = searchParams.get('filter')
-    if (filterParam === 'nss_wing' || filterParam === 'my_bharat_cell' || filterParam === 'all') {
-      setFilter(filterParam)
-    }
-  }, [searchParams])
+  const serviceDomains = [
+    { domain: 'Healthcare & Voluntary Blood Mobilization', leads: 'Student Service Leads [Pending Notification]', advisory: 'Faculty Advisory Member' },
+    { domain: 'Environmental Action & Coastal Greenery', leads: 'Student Service Leads [Pending Notification]', advisory: 'Faculty Advisory Member' },
+    { domain: 'Digital Primer & Literacy Mentorship', leads: 'Student Service Leads [Pending Notification]', advisory: 'Faculty Advisory Member' },
+    { domain: 'Swachh Bharat & Sanitation Awareness', leads: 'Student Service Leads [Pending Notification]', advisory: 'Faculty Advisory Member' },
+  ];
 
-  const nssCount = CORE_TEAM_STRUCTURE.filter((m) => m.designation === 'nss_wing').length
-  const bharatCount = CORE_TEAM_STRUCTURE.filter((m) => m.designation === 'my_bharat_cell').length
-  const totalCount = CORE_TEAM_STRUCTURE.length
+  // 28-position directory framework (24 NSS + 4 MY Bharat designation split)
+  const nssPositions = [
+    { id: 'nss-1', role: 'Student President / General Secretary', wing: 'Executive Core' },
+    { id: 'nss-2', role: 'Student Vice President (Outreach)', wing: 'Executive Core' },
+    { id: 'nss-3', role: 'Student Vice President (Operations)', wing: 'Executive Core' },
+    { id: 'nss-4', role: 'Joint Secretary (Administration)', wing: 'Executive Core' },
+    { id: 'nss-5', role: 'Joint Secretary (Logistics)', wing: 'Executive Core' },
+    { id: 'nss-6', role: 'Lead Coordinator (Blood Donation)', wing: 'Healthcare Wing' },
+    { id: 'nss-7', role: 'Assistant Coordinator (Blood Camps)', wing: 'Healthcare Wing' },
+    { id: 'nss-8', role: 'Health & Hygiene Awareness Lead', wing: 'Healthcare Wing' },
+    { id: 'nss-9', role: 'Lead Coordinator (Plantation Drives)', wing: 'Environment Wing' },
+    { id: 'nss-10', role: 'Coastal Greenery & Agro-Forestry Lead', wing: 'Environment Wing' },
+    { id: 'nss-11', role: 'Swachh Campus Stewardship Lead', wing: 'Environment Wing' },
+    { id: 'nss-12', role: 'Lead Coordinator (Primary Mentorship)', wing: 'Literacy & Mentorship' },
+    { id: 'nss-13', role: 'Digital Primer Module Coordinator', wing: 'Literacy & Mentorship' },
+    { id: 'nss-14', role: 'Rural Immersion Camp Coordinator', wing: 'Special Camps' },
+    { id: 'nss-15', role: 'Village Survey & Outreach Lead', wing: 'Special Camps' },
+    { id: 'nss-16', role: 'Special Camp Quartermaster', wing: 'Special Camps' },
+    { id: 'nss-17', role: 'Documentation & Editorial Lead', wing: 'Media & Documentation' },
+    { id: 'nss-18', role: 'Field Photography & Visual Archivist', wing: 'Media & Documentation' },
+    { id: 'nss-19', role: 'Annual Report & Newsletter Editor', wing: 'Media & Documentation' },
+    { id: 'nss-20', role: 'Volunteer Roster & Hours Registrar', wing: 'Records & Registry' },
+    { id: 'nss-21', role: 'First-Year Orientation Lead', wing: 'Student Relations' },
+    { id: 'nss-22', role: 'Second-Year Transition Coordinator', wing: 'Student Relations' },
+    { id: 'nss-23', role: 'Girls Volunteer Representative', wing: 'Advisory Council' },
+    { id: 'nss-24', role: 'Boys Volunteer Representative', wing: 'Advisory Council' },
+  ];
 
-  const filteredMembers = CORE_TEAM_STRUCTURE.filter((member) => {
-    const matchesFilter = filter === 'all' || member.designation === filter
-    const matchesSearch =
-      searchQuery.trim() === '' ||
-      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.roleTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.department.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesFilter && matchesSearch
-  })
+  const myBharatPositions = [
+    { id: 'myb-1', role: 'MY Bharat Campus Youth Ambassador', wing: 'MY Bharat Wing' },
+    { id: 'myb-2', role: 'National Portal Integration Lead', wing: 'MY Bharat Wing' },
+    { id: 'myb-3', role: 'Central Scheme & Delegations Coordinator', wing: 'MY Bharat Wing' },
+    { id: 'myb-4', role: 'Experiential Project & Hackathon Liaison', wing: 'MY Bharat Wing' },
+  ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb currentTitle="Our Team (28 Members)" />
-
-      {/* Editorial Header (IIT Patna Team Directory Style) */}
-      <div className="border-b border-[#292D2A]/10 pb-8 space-y-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1A3C29]" aria-hidden="true" />
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-            Official Student Coordination Structure
-          </span>
+    <div className="py-16 bg-ivory-100 min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="mb-8">
+          <BackButton onBack={() => { void navigate('/'); }} label="Back to Home" />
         </div>
 
-        <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1A3C29] leading-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          NSS Core Team ({totalCount} Members)
-        </h1>
+        <SectionHeading
+          eyebrow="Governance & Advisory Body"
+          title="NSS Leadership & Faculty Coordination"
+          subtitle="The governing structure driving the mission of National Service Scheme at Vignan's Institute of Information Technology."
+        />
 
-        <p className="text-sm sm:text-base text-[#292D2A]/80 max-w-3xl leading-relaxed">
-          The complete executive student body of NSS VIIT (A). All 28 members are collectively designated as the NSS Core Team, comprised of <strong>{nssCount} NSS-designated coordinators</strong> and <strong>{bharatCount} MY Bharat-designated leads</strong>.
-        </p>
-
-        {/* Executive Summary Badges */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-          <span className="px-3.5 py-1.5 rounded-full bg-[#1A3C29] text-[#F5F1E8] font-bold">
-            NSS Wing: {nssCount} Members
-          </span>
-          <span className="px-3.5 py-1.5 rounded-full bg-[#C3A66B] text-[#1A3C29] font-bold">
-            MY Bharat Cell: {bharatCount} Members
-          </span>
-          <span className="text-[#292D2A]/60 italic font-medium">
-            Governed by Sectional Separation of Concerns (PRD §3)
-          </span>
-        </div>
-      </div>
-
-      {/* Roster Integrity Banner */}
-      <div className="p-5 rounded-2xl bg-white border-2 border-[#C3A66B] shadow-sm text-xs text-[#292D2A]/85 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <h2 className="font-bold text-sm text-[#1A3C29]">
-            Official Appointment Verification Notice
-          </h2>
-          <p className="leading-relaxed">
-            The 28 positions shown below constitute the approved leadership framework for academic year 2025–26. Student names and portraits are awaiting official administrative sign-off; positions are represented with official roles and departments without fabricating student identities.
-          </p>
-        </div>
-        <span className="shrink-0 px-3 py-1.5 rounded-xl text-[11px] font-bold uppercase tracking-wider bg-[#F5F1E8] text-[#1A3C29] border border-[#292D2A]/15 text-center">
-          28-Member Capacity Confirmed
-        </span>
-      </div>
-
-      {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#292D2A]/10 shadow-sm">
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <button
-            type="button"
-            onClick={() => { setFilter('all'); }}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
-              filter === 'all'
-                ? 'bg-[#1A3C29] text-[#F5F1E8]'
-                : 'text-[#292D2A]/70 hover:bg-[#1A3C29]/10 hover:text-[#1A3C29]'
-            }`}
-          >
-            All Core Team ({totalCount})
-          </button>
-          <button
-            type="button"
-            onClick={() => { setFilter('nss_wing'); }}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
-              filter === 'nss_wing'
-                ? 'bg-[#1A3C29] text-[#F5F1E8]'
-                : 'text-[#292D2A]/70 hover:bg-[#1A3C29]/10 hover:text-[#1A3C29]'
-            }`}
-          >
-            NSS Wing ({nssCount})
-          </button>
-          <button
-            type="button"
-            onClick={() => { setFilter('my_bharat_cell'); }}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
-              filter === 'my_bharat_cell'
-                ? 'bg-[#C3A66B] text-[#1A3C29]'
-                : 'text-[#292D2A]/70 hover:bg-[#C3A66B]/20 hover:text-[#1A3C29]'
-            }`}
-          >
-            MY Bharat Cell ({bharatCount})
-          </button>
-        </div>
-
-        {/* Search */}
-        <div className="relative min-w-[260px]">
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(e) => { setSearchQuery(e.target.value); }}
-            placeholder="Search by role title or department..."
-            className="w-full pl-3 pr-8 py-2 rounded-xl border border-[#292D2A]/15 text-xs text-[#292D2A] bg-[#F5F1E8]/50 focus:outline-none focus:ring-2 focus:ring-[#1A3C29] focus:bg-white transition-all"
-            aria-label="Search core team roster"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => { setSearchQuery(''); }}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-[#292D2A]/50 hover:text-[#292D2A]"
-              aria-label="Clear search"
+        {/* Primary Leadership Profiles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
+          {leadershipTeam.map((leader) => (
+            <div
+              key={leader.id}
+              className="bg-white border border-ivory-300 shadow-card flex flex-col justify-between"
             >
-              &times;
-            </button>
-          )}
-        </div>
-      </div>
+              <div>
+                <div className="relative h-72 w-full bg-forest-900">
+                  <img
+                    src={leader.imagePlaceholder.url}
+                    alt={leader.imagePlaceholder.alt}
+                    className="w-full h-full object-cover filter grayscale contrast-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <PlaceholderNotice label={leader.imagePlaceholder.note} />
+                  </div>
+                </div>
 
-      {/* Team Roster Grid (28 Cards Total) */}
-      {filteredMembers.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredMembers.map((member) => (
-            <TeamCard key={member.id} member={member} />
+                <div className="p-6 space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-gold-700">
+                      {leader.role}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-forest-950">
+                    {leader.name}
+                  </h3>
+                  <p className="text-xs text-charcoal-500 pb-2 border-b border-ivory-200">
+                    {leader.designation}
+                  </p>
+                  <p className="text-xs text-charcoal-700 italic pt-1 leading-relaxed">
+                    "{leader.message}"
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-6 pt-0">
+                <span className="text-[10px] uppercase font-mono text-charcoal-400">
+                  VIIT Single NSS Unit Advisory
+                </span>
+              </div>
+            </div>
           ))}
         </div>
-      ) : (
-        <div className="bg-white rounded-2xl border border-dashed border-[#292D2A]/20 p-12 text-center space-y-3">
-          <p className="font-serif text-lg font-bold text-[#1A3C29]">
-            No team coordinators match your search
-          </p>
-          <p className="text-xs text-[#292D2A]/60 max-w-sm mx-auto">
-            Try resetting your search query or switching designation tabs.
-          </p>
-          <button
-            type="button"
-            onClick={() => { setFilter('all'); setSearchQuery(''); }}
-            className="px-4 py-2 rounded-xl text-xs font-bold bg-[#1A3C29] text-[#F5F1E8]"
-          >
-            Reset Filters
-          </button>
+
+        {/* 28-Position Team Directory (24 NSS + 4 MY Bharat Split) */}
+        <div id="directory" className="bg-white border border-ivory-300 p-8 shadow-card mb-12 space-y-8">
+          <div className="border-b border-ivory-200 pb-5">
+            <div className="flex items-center gap-2 text-xs font-semibold text-gold-700 uppercase tracking-wider mb-1">
+              <Users className="w-4 h-4" />
+              <span>Designation Structure (28 Positions)</span>
+            </div>
+            <h3 className="font-serif text-2xl font-bold text-forest-950">
+              Student Executive Body & Coordinators Directory
+            </h3>
+            <p className="text-xs sm:text-sm text-charcoal-600 mt-1 leading-relaxed">
+              Comprising 24 National Service Scheme collegiate positions and 4 dedicated Mera Yuva Bharat youth positions.
+            </p>
+          </div>
+
+          {/* NSS Positions: 24 Seats */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-forest-800 text-ivory-50">
+                NSS Collegiate Wing — 24 Positions
+              </span>
+              <span className="text-xs text-charcoal-500">
+                Collegiate Unit Service Leadership
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {nssPositions.map((pos, idx) => (
+                <div
+                  key={pos.id}
+                  className="p-3 bg-ivory-50/60 border border-ivory-200 rounded-xs flex flex-col justify-between"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-charcoal-500">
+                      <span>Seat #{String(idx + 1).padStart(2, '0')}</span>
+                      <span className="text-forest-800 font-semibold">{pos.wing}</span>
+                    </div>
+                    <p className="font-serif font-bold text-forest-950 text-xs">
+                      {pos.role}
+                    </p>
+                  </div>
+                  <div className="pt-2 mt-2 border-t border-ivory-200/80 flex items-center justify-between text-[10px] text-charcoal-500">
+                    <span className="italic">Candidate Pending Gazette</span>
+                    <UserCheck className="w-3 h-3 text-charcoal-400" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* MY Bharat Positions: 4 Seats */}
+          <div className="pt-6 border-t border-ivory-200">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gold-600 text-forest-950">
+                MY Bharat Wing — 4 Positions
+              </span>
+              <span className="text-xs text-charcoal-500">
+                National Portal & Youth Scheme Representation
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {myBharatPositions.map((pos, idx) => (
+                <div
+                  key={pos.id}
+                  className="p-3 bg-ivory-100/70 border border-gold-500/40 rounded-xs flex flex-col justify-between"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-charcoal-500">
+                      <span>Seat #{String(idx + 25).padStart(2, '0')}</span>
+                      <span className="text-gold-700 font-semibold">MY Bharat</span>
+                    </div>
+                    <p className="font-serif font-bold text-forest-950 text-xs">
+                      {pos.role}
+                    </p>
+                  </div>
+                  <div className="pt-2 mt-2 border-t border-gold-500/30 flex items-center justify-between text-[10px] text-charcoal-500">
+                    <span className="italic">Nomination Pending</span>
+                    <Sparkles className="w-3 h-3 text-gold-600" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Privacy & Safeguard Notice */}
+          <div className="p-4 bg-ivory-200/60 border border-ivory-300 text-xs text-charcoal-700 flex items-center gap-2 rounded-xs">
+            <AlertCircle className="w-4 h-4 text-forest-800 shrink-0" />
+            <span>
+              In accordance with institutional privacy safeguards, student names and photographs are published exclusively following authorized gazette notifications and signed student consent.
+            </span>
+          </div>
         </div>
-      )}
+
+        {/* Functional Domains Directory */}
+        <div id="domains" className="bg-white border border-ivory-300 p-8 shadow-card space-y-6 mb-12">
+          <div className="flex items-center gap-2 border-b border-ivory-200 pb-4">
+            <Shield className="w-5 h-5 text-forest-800" />
+            <h3 className="font-serif text-xl font-bold text-forest-950">
+              Single Collegiate Unit — Functional Focus Domains
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {serviceDomains.map((u, idx) => (
+              <div key={idx} className="p-4 bg-ivory-50 border border-ivory-200 space-y-2">
+                <h4 className="font-serif font-bold text-forest-900 text-sm">
+                  {u.domain}
+                </h4>
+                <p className="text-xs text-charcoal-600">
+                  <strong className="text-charcoal-800">Coordination:</strong> {u.leads}
+                </p>
+                <p className="text-xs text-charcoal-600">
+                  <strong className="text-charcoal-800">Faculty Advisory:</strong> {u.advisory}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-4 bg-ivory-200/60 border border-ivory-300 text-xs text-charcoal-700 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-forest-800 shrink-0" />
+            <span>
+              Official faculty appointments and annual student executive rosters are published following administrative approval. Direct contact details will be added upon verification.
+            </span>
+          </div>
+        </div>
+
+        {/* Closed Registration Banner */}
+        <div className="pt-2">
+          <ClosedRegistrationBanner />
+        </div>
+
+      </div>
     </div>
-  )
+  );
 }

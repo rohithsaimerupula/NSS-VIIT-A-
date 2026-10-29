@@ -14,27 +14,69 @@
    a single change here propagates everywhere.
    ──────────────────────────────────────────────────────────────── */
 @theme {
-  /* Brand palette */
+  /* Brand palette base */
   --color-ivory:    #F5F1E8; /* Primary page background and editorial surfaces    */
   --color-forest:   #1A3C29; /* Brand color, navigation emphasis, primary actions */
   --color-gold:     #C3A66B; /* Restrained accent for highlights, rules, details  */
   --color-charcoal: #292D2A; /* Primary text and strong contrast                  */
   --color-white:    #FFFFFF; /* Forms, dashboards and content surfaces             */
 
+  /* Extended Shades matching VIIT NSS WEB design system */
+  --color-forest-950: #0C1B12;
+  --color-forest-900: #11281B;
+  --color-forest-850: #153323;
+  --color-forest-800: #1A3C29;
+  --color-forest-700: #235037;
+  --color-forest-600: #2D6646;
+  --color-forest-500: #3A8159;
+  --color-forest-200: #C4D6CB;
+  --color-forest-100: #E2EBE5;
+  --color-forest-50:  #F0F5F2;
+
+  --color-ivory-50:   #FAF8F3;
+  --color-ivory-100:  #F4F0E6;
+  --color-ivory-200:  #EAE3D3;
+  --color-ivory-300:  #DED3BD;
+  --color-ivory-400:  #CBBFA4;
+
+  --color-gold-100:   #F9F5EC;
+  --color-gold-200:   #EFE5D2;
+  --color-gold-300:   #E3D2AE;
+  --color-gold-400:   #D3BA85;
+  --color-gold-500:   #C3A66B;
+  --color-gold-600:   #AA8C52;
+  --color-gold-700:   #8C713D;
+
+  --color-charcoal-950: #0A0D0B;
+  --color-charcoal-900: #141A16;
+  --color-charcoal-800: #202823;
+  --color-charcoal-700: #343E38;
+  --color-charcoal-600: #4D5B52;
+  --color-charcoal-500: #697B70;
+  --color-charcoal-400: #88998F;
+
+  /* Shadows matching VIIT NSS WEB */
+  --shadow-subtle: 0 2px 10px rgba(26, 60, 41, 0.05);
+  --shadow-card: 0 10px 30px -10px rgba(26, 60, 41, 0.08);
+  --shadow-card-hover: 0 20px 40px -15px rgba(26, 60, 41, 0.15);
+  --shadow-elevated: 0 25px 50px -12px rgba(20, 26, 22, 0.25);
+
   /* Semantic aliases */
-  --color-bg-primary:    var(--color-ivory);
+  --color-bg-primary:    var(--color-ivory-100);
   --color-bg-surface:    var(--color-white);
-  --color-text-primary:  var(--color-charcoal);
-  --color-text-inverse:  var(--color-ivory);
-  --color-brand-primary: var(--color-forest);
-  --color-brand-accent:  var(--color-gold);
+  --color-text-primary:  var(--color-charcoal-900);
+  --color-text-inverse:  var(--color-ivory-50);
+  --color-brand-primary: var(--color-forest-800);
+  --color-brand-accent:  var(--color-gold-500);
 
   /* ── Typography ──────────────────────────────────────────────────
      UI/UX Brief §2: Editorial serif headings with clear sans-serif body/UI font.
      Approved Headings: Playfair Display. Approved Body/UI: Plus Jakarta Sans.
      ────────────────────────────────────────────────────────────── */
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif:   'Playfair Display', Cormorant Garamond, Georgia, serif;
+  --font-sans:    'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Playfair Display', Cormorant Garamond, Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* ── Motion (UI/UX Brief §5) ─────────────────────────────────────
      Duration vocabulary used by all animation utilities.
@@ -111,6 +153,107 @@ body {
     display: block;
     max-width: 100%;
   }
+}
+
+/* ─── Motion & Interaction Vocabulary (UI/UX Brief §5) ─────────────
+   High-performance GPU-accelerated micro-interactions.
+   Only transforms and opacity are animated to prevent layout thrashing.
+   ────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Subtle, restrained hover lift for cards */
+.hover-lift {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease;
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(26, 60, 41, 0.08), 0 4px 8px -2px rgba(26, 60, 41, 0.03);
+}
+
+/* Subtle image zoom on hover for gallery and event cards */
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.035);
+}
+
+/* Tactile button active feedback */
+.btn-press {
+  transition: transform 120ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Accessible skip-link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 16px;
+  background: var(--color-forest);
+  color: var(--color-ivory);
+  padding: 8px 16px;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus {
+  top: 16px;
 }
 
 /* ─── Reduced motion (UI/UX Brief §5, PRD §7) ───────────────────── */

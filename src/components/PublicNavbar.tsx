@@ -29,119 +29,108 @@ export function PublicNavbar(): ReactElement {
 
   return (
     <>
-      {/* ── 1. Top Institutional Info Strip ──────────────────────────────── */}
-      <div className="bg-[#1A3C29] text-[#F5F1E8] text-[11px] py-1 px-4 sm:px-6 lg:px-8 border-b border-[#C3A66B]/30 tracking-tight">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 truncate">
-            <span className="font-semibold text-[#C3A66B] hidden sm:inline">
+      {/* ── 1. Slim Institutional Top Strip ──────────────────────────────── */}
+      <div className="bg-[#EBE5D8] text-[#292D2A] text-[11px] py-1 px-4 sm:px-6 lg:px-8 border-b border-[#292D2A]/10 leading-tight">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-x-3 gap-y-0.5">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 truncate">
+            <span className="font-semibold text-[#1A3C29]">
               Vignan&apos;s Institute of Information Technology (Autonomous)
             </span>
-            <span className="font-semibold text-[#C3A66B] sm:hidden truncate">
-              Vignan VIIT (Autonomous)
+            <span className="hidden sm:inline text-[#292D2A]/35" aria-hidden="true">&bull;</span>
+            <span className="hidden sm:inline text-[#292D2A]/80 font-medium">
+              Affiliated to JNTUGV, Vizianagaram
             </span>
-            <span className="hidden sm:inline text-[#F5F1E8]/40" aria-hidden="true">&bull;</span>
-            <span className="hidden sm:inline text-[#F5F1E8]/85">
-              Affiliated to JNTUGV
-            </span>
-            <span className="hidden md:inline text-[#F5F1E8]/40" aria-hidden="true">&bull;</span>
-            <span className="hidden md:inline text-[#F5F1E8]/70">
+            <span className="hidden md:inline text-[#292D2A]/35" aria-hidden="true">&bull;</span>
+            <span className="hidden md:inline text-[#292D2A]/70">
               Duvvada, Visakhapatnam
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px] shrink-0 font-medium">
+          <div className="flex items-center gap-4 text-[11px] ml-auto shrink-0 font-medium">
             <Link
               to="/volunteer"
-              className="hover:text-[#C3A66B] transition-colors hidden sm:inline"
+              className="text-[#1A3C29] hover:text-[#C3A66B] transition-colors hidden sm:inline"
             >
               Induction Notice
             </Link>
-            <span className="hidden sm:inline text-[#F5F1E8]/30" aria-hidden="true">|</span>
+            <span className="hidden sm:inline text-[#292D2A]/25" aria-hidden="true">|</span>
             <Link
               to="/contact"
-              className="hover:text-[#C3A66B] transition-colors"
+              className="text-[#1A3C29] hover:text-[#C3A66B] transition-colors"
             >
-              NSS Secretariat
+              Campus NSS Cell Office
             </Link>
           </div>
         </div>
       </div>
 
-      {/* ── 2. Primary Navigation Bar ───────────────────────────────────── */}
+      {/* ── 2. Compact Primary Navigation Bar ────────────────────────────── */}
       <header className="sticky top-0 z-40 bg-[#F5F1E8]/95 backdrop-blur-md border-b border-[#292D2A]/10 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-3">
           {/* Logo & Identity */}
           <Link
             to="/"
-            className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#1A3C29] rounded-md p-1 group shrink-0"
+            className="flex items-center gap-2.5 sm:gap-3 focus:outline-none focus:ring-2 focus:ring-[#1A3C29] rounded-md p-0.5 group shrink-0"
             aria-label="NSS VIIT (A) Home"
           >
-            <div
-              className="w-10 h-10 rounded-full bg-[#1A3C29] border-2 border-[#C3A66B] flex items-center justify-center text-[#F5F1E8] font-serif font-bold text-sm shadow-sm group-hover:scale-105 transition-transform shrink-0"
-              aria-hidden="true"
-            >
-              NSS
+            <div className="p-0.5 bg-white rounded-full border border-ivory-300 shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+              <img
+                src="/assets/logos/nss-logo.webp"
+                alt="National Service Scheme Seal"
+                className="w-9 h-9 sm:w-10 sm:h-10 object-contain"
+                width="40"
+                height="40"
+              />
             </div>
-            <div className="flex flex-col min-w-0">
+            <div className="border-l border-[#C3A66B]/50 pl-2.5 sm:pl-3 flex flex-col justify-center">
               <span
-                className="text-lg sm:text-xl font-bold tracking-tight text-[#1A3C29] leading-none"
+                className="text-base sm:text-lg font-bold tracking-tight text-[#1A3C29] leading-none"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 NSS VIIT (A)
               </span>
-              <span className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase text-[#C3A66B] mt-0.5 hidden sm:inline">
-                National Service Scheme &bull; MY Bharat Cell
-              </span>
-              <span className="text-[10px] font-semibold tracking-wider uppercase text-[#C3A66B] mt-0.5 sm:hidden">
-                MY Bharat Youth Cell
+              <span className="text-[10px] font-semibold tracking-wider uppercase text-[#C3A66B] mt-0.5 hidden sm:inline">
+                National Service Scheme &bull; MY Bharat
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links (Direct Navigation with Active Highlighting) */}
-          <nav aria-label="Primary Navigation" className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {PRIMARY_NAV_ITEMS.map((item) => {
-              const active = isCurrent(item.to)
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  aria-current={active ? 'page' : undefined}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-150 ${
-                    active
-                      ? 'bg-[#1A3C29] text-[#F5F1E8] shadow-xs'
-                      : 'text-[#292D2A]/75 hover:text-[#1A3C29] hover:bg-[#1A3C29]/10'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
-          </nav>
-
-          {/* Actions & Two-Panel Directory Menu Trigger */}
+          {/* Actions & Menu Trigger */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Quick action for desktop */}
-            <Link
-              to="/volunteer"
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#1A3C29] bg-[#C3A66B]/25 hover:bg-[#C3A66B]/40 border border-[#C3A66B]/60 transition-colors"
-            >
-              <span>Join Unit</span>
-            </Link>
+            <nav aria-label="Primary Navigation" className="hidden lg:flex items-center gap-1">
+              {PRIMARY_NAV_ITEMS.map((item) => {
+                const active = isCurrent(item.to)
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    aria-current={active ? 'page' : undefined}
+                    className={`px-2.5 py-1 rounded text-xs font-semibold uppercase tracking-wider transition-colors whitespace-nowrap ${
+                      active
+                        ? 'bg-[#1A3C29] text-[#F5F1E8] shadow-xs'
+                        : 'text-[#292D2A]/75 hover:text-[#1A3C29] hover:bg-[#1A3C29]/10'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </nav>
 
-            {/* Menu Trigger Button */}
+            <div className="h-4 w-px bg-[#292D2A]/20 mx-1 hidden lg:block" aria-hidden="true" />
+
+            {/* Dark-Green Menu Trigger Button (Used for both Desktop & Mobile) */}
             <button
               type="button"
               onClick={() => { setOverlayOpen(true); }}
-              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#1A3C29] text-[#F5F1E8] hover:bg-[#C3A66B] hover:text-[#1A3C29] border border-[#C3A66B] transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1A3C29] focus:ring-offset-2 cursor-pointer"
-              style={{ color: '#F5F1E8' }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1A3C29] hover:bg-[#1A3C29]/90 text-[#F5F1E8] text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs focus:outline-none focus:ring-2 focus:ring-[#1A3C29] cursor-pointer"
               aria-haspopup="dialog"
               aria-expanded={overlayOpen}
               aria-controls="institutional-navigation-overlay"
-              aria-label="Explore institutional navigation directory"
+              aria-label="Explore institutional navigation menu"
             >
               <svg
-                className="w-4 h-4 shrink-0"
+                className="w-3.5 h-3.5 shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

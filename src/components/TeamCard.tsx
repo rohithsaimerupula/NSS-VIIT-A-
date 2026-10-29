@@ -9,7 +9,7 @@ export function TeamCard({ member }: TeamCardProps): ReactElement {
   const isNSS = member.designation === 'nss_wing'
 
   return (
-    <div className="bg-white rounded-xl border border-[#292D2A]/10 p-5 flex flex-col justify-between hover:border-[#C3A66B] hover:shadow-sm transition-all duration-200">
+    <div className="bg-white rounded-xl border border-[#292D2A]/10 p-5 flex flex-col justify-between hover-lift">
       <div>
         <div className="flex items-center justify-between gap-2 mb-3">
           <span

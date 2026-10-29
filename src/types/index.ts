@@ -145,3 +145,156 @@ export interface FeatureFlags {
 export type ApiResult<T> =
   | { success: true; data: T }
   | { success: false; error: string; code?: string }
+
+/** ─── Content and Portal Configuration Types ─────────────────────── */
+export interface SiteConfig {
+  institution: {
+    fullName: string;
+    shortName: string;
+    affiliation: string;
+    campusLocation: string;
+    addressLine1: string;
+    addressLine2: string;
+    city: string;
+    state: string;
+    pincode: string;
+    isVerifiedAddress: boolean;
+    officialWebsiteUrl: string | null;
+    officialEmail: string | null;
+    officialPhone: string | null;
+    nssCellLocation: string | null;
+  };
+  socialLinks: {
+    instagramUrl: string | null;
+    isInstagramProvided: boolean;
+    myBharatPortalUrl: string;
+    nationalNssPortalUrl: string;
+  };
+  logos: {
+    nss: string;
+    viit: string;
+    myBharat: string;
+  };
+}
+
+export interface HeroSlide {
+  id: string;
+  themeTitle: string;
+  headline: string;
+  subheading: string;
+  description: string;
+  imageUrl: string;
+  imageAlt: string;
+  accentBadge: string;
+}
+
+export interface ImpactMetric {
+  id: string;
+  label: string;
+  value: string;
+  descriptor: string;
+  isPlaceholder: boolean;
+  statusLabel?: string;
+}
+
+export interface ActivityItem {
+  id: string;
+  title: string;
+  category: 'Community Health' | 'Environmental Action' | 'Literacy & Youth' | 'Disaster Relief' | 'Civic Awareness';
+  tagline: string;
+  description: string;
+  dateRange: string;
+  location: string;
+  isDemoSample?: boolean;
+  imagePlaceholder: {
+    url: string;
+    alt: string;
+    note: string;
+  };
+  featured: boolean;
+}
+
+export interface EventItem {
+  id: string;
+  title: string;
+  date: string;
+  time?: string;
+  location: string;
+  category: string;
+  description: string;
+  status: 'Upcoming' | 'In Progress' | 'Recently Concluded';
+  initiative?: 'NSS' | 'MY Bharat' | 'Joint';
+  isOfficialNationalObservance?: boolean;
+  isDemoSample?: boolean;
+  isFeatured?: boolean;
+}
+
+export interface LeaderProfile {
+  id: string;
+  name: string;
+  role: string;
+  designation: string;
+  department?: string;
+  message: string;
+  isPlaceholderImage: boolean;
+  isDemoSample?: boolean;
+  imagePlaceholder: {
+    url: string;
+    alt: string;
+    note: string;
+  };
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  caption: string;
+  category: string;
+  spanClass: string;
+  imagePlaceholder: {
+    url: string;
+    alt: string;
+    note: string;
+  };
+}
+
+export interface VolunteerStory {
+  id: string;
+  author: string;
+  roleOrBatch: string;
+  title: string;
+  quote: string;
+  fullStory: string;
+  year: string;
+  isDemoSample?: boolean;
+}
+
+export interface AchievementItem {
+  id: string;
+  title: string;
+  awardingBody: string;
+  year: string;
+  verifiedDetails: string;
+  verificationBadge: string;
+  isDemoSample?: boolean;
+}
+
+export interface HeritagePublication {
+  id: string;
+  title: string;
+  type: 'Annual Report' | 'Handbook' | 'Newsletter' | 'Policy Guide';
+  publicationYear: string;
+  description: string;
+  status: 'Archived' | 'Available in NSS Cell' | 'Pending Digital Upload';
+  isOfficialNationalDocument?: boolean;
+}
+
+export interface CommunityPartner {
+  id: string;
+  name: string;
+  type: 'Government Body' | 'Affiliating University' | 'Youth Body' | 'Civic Administration' | 'Government Healthcare' | 'Gram Panchayat';
+  engagementScope: string;
+  location: string;
+  isOfficialStatutoryAlliance?: boolean;
+  isDemoSample?: boolean;
+}

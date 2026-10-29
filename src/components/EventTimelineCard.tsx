@@ -12,7 +12,7 @@ export function EventTimelineCard({ event, index = 0 }: EventTimelineCardProps):
   const isUpcoming = event.status === 'upcoming'
 
   return (
-    <article className="relative bg-white rounded-2xl border border-[#292D2A]/10 overflow-hidden shadow-sm hover:shadow-lg hover:border-[#C3A66B] transition-all duration-300 flex flex-col justify-between group">
+    <article className="relative bg-white rounded-2xl border border-[#292D2A]/10 overflow-hidden shadow-sm hover-lift flex flex-col justify-between group">
       {/* Top Banner Stripe */}
       <div
         className={`h-2 w-full ${

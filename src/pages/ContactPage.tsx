@@ -1,200 +1,230 @@
-import { useState, useEffect, type ReactElement, type SyntheticEvent } from 'react'
-import { Breadcrumb } from '@/components/Breadcrumb'
+import { useState, useEffect, type ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SectionHeading } from '../components/ui/SectionHeading';
+import { BackButton } from '../components/ui/BackButton';
+import { siteConfig } from '../config/siteConfig';
+import { MapPin, Mail, Phone, Globe, AlertCircle, Send, CheckCircle2 } from 'lucide-react';
+import { ClosedRegistrationBanner } from '../components/ClosedRegistrationBanner';
 
 export function ContactPage(): ReactElement {
-  const [submitted, setSubmitted] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    department: '',
-    subject: '',
-    message: '',
-  })
+  const navigate = useNavigate();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = 'Contact NSS Secretariat & Cell Office | NSS VIIT (A)'
-  }, [])
+    document.title = 'Contact NSS Secretariat & Campus Desk | NSS VIIT (A)';
+  }, []);
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb currentTitle="Contact Secretariat" />
-
-      {/* ── 1. Page Header (IIT Patna Contact Layout) ────────────────── */}
-      <div className="border-b border-[#292D2A]/10 pb-8 space-y-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1A3C29]" aria-hidden="true" />
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-            Official Communication & Secretariat
-          </span>
+    <div className="py-16 bg-ivory-100 min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="mb-8">
+          <BackButton onBack={() => { void navigate('/'); }} label="Back to Home" />
         </div>
 
-        <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1A3C29] leading-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          Contact NSS VIIT (A)
-        </h1>
+        <SectionHeading
+          eyebrow="Institutional Liaison"
+          title="Contact VIIT NSS Cell"
+          subtitle="Official institutional desk, campus location, and communication channels for youth community initiatives."
+        />
 
-        <p className="text-base sm:text-lg text-[#292D2A]/80 max-w-3xl leading-relaxed">
-          Submit official institutional inquiries, village collaboration proposals, or volunteer queries to the National Service Scheme Secretariat and MY Bharat Youth Cell at VIIT (A).
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        {/* ── 2. Official Inquiry Form ─────────────────────────────────── */}
-        <div className="lg:col-span-2 bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-12 shadow-sm space-y-6">
-          {submitted ? (
-            <div className="py-16 text-center space-y-5" role="status">
-              <div className="w-14 h-14 rounded-full bg-[#1A3C29]/10 text-[#1A3C29] flex items-center justify-center font-bold text-2xl mx-auto">
-                &#10003;
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-serif text-[#1A3C29]">
-                Message Recorded (Pre-Launch Staging)
-              </h2>
-              <p className="text-xs sm:text-sm text-[#292D2A]/75 max-w-md mx-auto leading-relaxed">
-                Thank you for your message. Your input has been validated and recorded in local staging mode. Live email dispatch and backend integration remain inactive during pre-launch development. For urgent official correspondence, please contact us directly at <strong className="text-[#1A3C29]">nss@vignaniit.edu.in</strong> or visit the campus office.
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSubmitted(false);
-                  setFormData({ name: '', email: '', department: '', subject: '', message: '' });
-                }}
-                className="mt-4 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#1A3C29] text-[#F5F1E8] hover:bg-[#1A3C29]/90 transition-colors"
-              >
-                Submit Another Message
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="border-b border-[#292D2A]/10 pb-3">
-                <h2 className="text-2xl font-bold font-serif text-[#1A3C29]">
-                  Send a Direct Message
-                </h2>
-                <p className="text-xs text-[#292D2A]/60 mt-1">
-                  All fields marked with an asterisk (<span className="text-red-600">*</span>) are mandatory.
-                </p>
-                <div className="mt-2.5 p-3 rounded-xl bg-[#C3A66B]/15 border border-[#C3A66B]/30 text-xs text-[#1A3C29]">
-                  <strong>Pre-Launch Staging Notice:</strong> Submissions are validated locally. Live email delivery to the Secretariat will activate upon backend launch.
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label htmlFor="name" className="text-xs font-bold text-[#1A3C29]">
-                    Full Name <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="name"
-                    required
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => { setFormData({ ...formData, name: e.target.value }); }}
-                    placeholder="Enter student or visitor name"
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#292D2A]/15 text-xs text-[#292D2A] focus:outline-none focus:ring-2 focus:ring-[#1A3C29] bg-[#F5F1E8]/30"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label htmlFor="email" className="text-xs font-bold text-[#1A3C29]">
-                    Official / Personal Email <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    required
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => { setFormData({ ...formData, email: e.target.value }); }}
-                    placeholder="name@vignaniit.edu.in"
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#292D2A]/15 text-xs text-[#292D2A] focus:outline-none focus:ring-2 focus:ring-[#1A3C29] bg-[#F5F1E8]/30"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label htmlFor="subject" className="text-xs font-bold text-[#1A3C29]">
-                  Inquiry Topic <span className="text-red-600">*</span>
-                </label>
-                <input
-                  id="subject"
-                  required
-                  type="text"
-                  value={formData.subject}
-                  onChange={(e) => { setFormData({ ...formData, subject: e.target.value }); }}
-                  placeholder="e.g., Blood Drive Collaboration, Rural Camp Query, Induction Question"
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#292D2A]/15 text-xs text-[#292D2A] focus:outline-none focus:ring-2 focus:ring-[#1A3C29] bg-[#F5F1E8]/30"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label htmlFor="message" className="text-xs font-bold text-[#1A3C29]">
-                  Detailed Message <span className="text-red-600">*</span>
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={5}
-                  value={formData.message}
-                  onChange={(e) => { setFormData({ ...formData, message: e.target.value }); }}
-                  placeholder="Provide complete details regarding your inquiry..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#292D2A]/15 text-xs text-[#292D2A] focus:outline-none focus:ring-2 focus:ring-[#1A3C29] bg-[#F5F1E8]/30"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#1A3C29] text-[#F5F1E8] hover:bg-[#1A3C29]/90 border border-[#C3A66B] transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-[#1A3C29]"
-              >
-                Submit Inquiry (Staging Mode)
-              </button>
-            </form>
-          )}
-        </div>
-
-        {/* ── 3. Institutional Secretariat Contact Info ───────────────── */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-7 shadow-sm space-y-4">
-            <h3 className="font-bold text-lg font-serif text-[#1A3C29] border-b border-[#292D2A]/10 pb-3">
-              Campus Secretariat
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+          
+          {/* Institutional Contact Information Card (lg:col-span-5) */}
+          <div className="lg:col-span-5 bg-white border border-ivory-300 p-8 shadow-card space-y-6">
+            <h3 className="font-serif text-2xl font-bold text-forest-950 border-b border-ivory-200 pb-3">
+              Official Institutional Address
             </h3>
-            <div className="text-xs text-[#292D2A]/80 space-y-2.5 leading-relaxed">
-              <p className="font-bold text-[#1A3C29]">
-                National Service Scheme (NSS) Unit
-              </p>
-              <p>Vignan's Institute of Information Technology (Autonomous)</p>
-              <p>Beside VSEZ, Vadlapudi Post, Duvvada</p>
-              <p>Visakhapatnam, Andhra Pradesh — 530049</p>
 
-              <div className="pt-3 border-t border-[#292D2A]/10 space-y-2">
-                <p>
-                  <strong className="text-[#1A3C29]">Official Email:</strong><br />
-                  <span className="text-[#1A3C29] font-mono">nss@vignaniit.edu.in</span>{' '}
-                  <span className="text-[10px] text-[#292D2A]/50 block sm:inline">(Awaiting formal mailbox setup confirmation)</span>
-                </p>
-                <p>
-                  <strong className="text-[#1A3C29]">Hours of Operation:</strong><br />
-                  09:00 AM – 04:30 PM (Mon – Sat)
-                </p>
+            <div className="space-y-4 text-sm text-charcoal-800">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-forest-800 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-bold text-forest-900">{siteConfig.institution.fullName}</p>
+                  <p className="text-charcoal-700">{siteConfig.institution.addressLine1}</p>
+                  <p className="text-charcoal-700">{siteConfig.institution.addressLine2}</p>
+                  <p className="text-charcoal-700">
+                    {siteConfig.institution.city}, {siteConfig.institution.state} – {siteConfig.institution.pincode}
+                  </p>
+                  {siteConfig.institution.nssCellLocation && (
+                    <p className="text-xs font-semibold text-gold-700 mt-2 bg-ivory-200 p-2 border border-ivory-300">
+                      Physical Desk: {siteConfig.institution.nssCellLocation}
+                    </p>
+                  )}
+                </div>
               </div>
+
+              {/* Website */}
+              <div className="flex items-center gap-3 pt-2">
+                <Globe className="w-5 h-5 text-forest-800 shrink-0" />
+                <div>
+                  <span className="text-xs text-charcoal-500 block">Official Institution Portal:</span>
+                  <a
+                    href={siteConfig.institution.officialWebsiteUrl || 'https://vignaniit.edu.in'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-forest-800 hover:text-gold-700 underline"
+                  >
+                    https://vignaniit.edu.in
+                  </a>
+                </div>
+              </div>
+
+              {/* Email Notice */}
+              <div className="flex items-start gap-3 pt-2">
+                <Mail className="w-5 h-5 text-forest-800 shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-xs text-charcoal-500 block">Official Email Address:</span>
+                  <p className="font-medium text-forest-800">
+                    nss@vignaniit.edu.in
+                  </p>
+                </div>
+              </div>
+
+              {/* Phone Notice */}
+              <div className="flex items-start gap-3 pt-2">
+                <Phone className="w-5 h-5 text-forest-800 shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-xs text-charcoal-500 block">Institutional Telephone / Desk:</span>
+                  <p className="text-xs text-charcoal-600">
+                    VIIT EPABX: Desk Extension via College Reception
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-forest-900 text-ivory-100 text-xs space-y-1">
+              <span className="font-bold text-gold-400 uppercase tracking-wider block">Student Cell Hours</span>
+              <p>Monday – Friday: 03:30 PM – 05:00 PM</p>
+              <p className="text-ivory-300">VIIT Campus NSS Cell Office, Duvvada</p>
             </div>
           </div>
 
-          <div className="bg-[#1A3C29] text-[#F5F1E8] rounded-3xl p-7 border-2 border-[#C3A66B] shadow-lg space-y-3">
-            <h4 className="font-bold text-sm text-[#C3A66B] uppercase tracking-wider">
-              Volunteer Data Privacy
-            </h4>
-            <p className="text-xs leading-relaxed text-[#F5F1E8]/85">
-              Personal attendance records, volunteer service-hour logs, and sensitive reports are maintained with strict privacy. Individual records are never disclosed to third parties without college authorization.
-            </p>
+          {/* Inquiry / Engagement Interface (lg:col-span-7) */}
+          <div className="lg:col-span-7 bg-white border border-ivory-300 p-8 shadow-card">
+            <div className="flex items-center justify-between border-b border-ivory-200 pb-3 mb-6">
+              <h3 className="font-serif text-2xl font-bold text-forest-950">
+                Community Inquiry & Collaboration
+              </h3>
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-ivory-200 text-forest-900">
+                Public Desk
+              </span>
+            </div>
+
+            {formSubmitted ? (
+              <div className="p-8 bg-forest-50 border border-forest-700/40 text-center space-y-4">
+                <CheckCircle2 className="w-12 h-12 text-forest-800 mx-auto" />
+                <h4 className="font-serif text-xl font-bold text-forest-950">
+                  Inquiry Recorded (Frontend Preview)
+                </h4>
+                <p className="text-xs sm:text-sm text-charcoal-700 max-w-md mx-auto">
+                  Thank you for reaching out. Per the project scope boundary, this frontend interface simulates submission. Real form transmission will be enabled during the upcoming backend integration phase.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { setFormSubmitted(false); }}
+                  className="px-4 py-2 bg-forest-800 text-ivory-50 text-xs font-semibold uppercase tracking-wider cursor-pointer"
+                >
+                  Send Another Note
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-charcoal-700 mb-1">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Dr. / Sri / Student Name"
+                      className="w-full px-3.5 py-2.5 text-sm bg-ivory-50 border border-ivory-300 focus:border-forest-800 focus:ring-1 focus:ring-forest-800"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-charcoal-700 mb-1">
+                      Organization / Department *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. VIIT Dept / NGO / Hospital"
+                      className="w-full px-3.5 py-2.5 text-sm bg-ivory-50 border border-ivory-300 focus:border-forest-800 focus:ring-1 focus:ring-forest-800"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-charcoal-700 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="your.email@example.com"
+                      className="w-full px-3.5 py-2.5 text-sm bg-ivory-50 border border-ivory-300 focus:border-forest-800 focus:ring-1 focus:ring-forest-800"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-charcoal-700 mb-1">
+                      Nature of Inquiry *
+                    </label>
+                    <select
+                      className="w-full px-3.5 py-2.5 text-sm bg-ivory-50 border border-ivory-300 focus:border-forest-800 focus:ring-1 focus:ring-forest-800"
+                    >
+                      <option>Community Health & Blood Drive Collaboration</option>
+                      <option>Adopted Village Initiative Support</option>
+                      <option>Environmental Sapling Plantation</option>
+                      <option>General Institutional Query</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-charcoal-700 mb-1">
+                    Message / Collaboration Brief *
+                  </label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Provide details about your proposed community initiative or query..."
+                    className="w-full px-3.5 py-2.5 text-sm bg-ivory-50 border border-ivory-300 focus:border-forest-800 focus:ring-1 focus:ring-forest-800"
+                  />
+                </div>
+
+                <div className="p-3 bg-ivory-100 border border-ivory-200 text-xs text-charcoal-600 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-forest-800 shrink-0" />
+                  <span>
+                    Frontend Phase: Backend API and persistent email dispatch are intentionally deferred per the strict scope boundary.
+                  </span>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-7 py-3 bg-forest-800 text-ivory-50 hover:bg-forest-900 font-semibold text-xs uppercase tracking-wider transition-colors inline-flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                >
+                  <Send className="w-4 h-4 text-gold-400" />
+                  <span>Record Inquiry</span>
+                </button>
+              </form>
+            )}
           </div>
+
         </div>
+
+        {/* Closed Registration Notice */}
+        <div className="mb-8">
+          <ClosedRegistrationBanner />
+        </div>
+
       </div>
     </div>
-  )
+  );
 }

@@ -1,149 +1,137 @@
-import { useEffect, type ReactElement } from 'react'
-import { Link } from 'react-router-dom'
-import { ClosedRegistrationBanner } from '@/components/ClosedRegistrationBanner'
-import { Breadcrumb } from '@/components/Breadcrumb'
+import { useEffect, type ReactElement } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { SectionHeading } from '../components/ui/SectionHeading';
+import { BackButton } from '../components/ui/BackButton';
+import { siteConfig } from '../config/siteConfig';
+import { BookOpen, ArrowRight } from 'lucide-react';
+import { ClosedRegistrationBanner } from '../components/ClosedRegistrationBanner';
 
 export function AboutPage(): ReactElement {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    document.title = 'About NSS VIIT (A) — History, Mandate & Governance | NSS VIIT (A)'
-  }, [])
+    document.title = 'About NSS VIIT (A) — History, Mandate & Governance | NSS VIIT (A)';
+  }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb currentTitle="About NSS VIIT (A)" />
-
-      {/* ── 1. Page Header (IIT Patna Style Institutional Head) ────────── */}
-      <div className="border-b border-[#292D2A]/10 pb-8 space-y-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1A3C29]" aria-hidden="true" />
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-            Autonomous Unit History & Governance
-          </span>
+    <div className="py-16 bg-ivory-100 min-h-screen">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Accessible Back Button */}
+        <div className="mb-8">
+          <BackButton onBack={() => { void navigate('/'); }} label="Back to Home" />
         </div>
 
-        <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1A3C29] leading-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          About NSS VIIT (A)
-        </h1>
+        <SectionHeading
+          eyebrow="Institutional Monograph"
+          title="About VIIT NSS Cell & Mission"
+          subtitle="How Vignan's Institute of Information Technology integrates social consciousness, public health, and rural development into engineering education."
+        />
 
-        <p className="text-base sm:text-lg text-[#292D2A]/80 max-w-4xl leading-relaxed">
-          The National Service Scheme Unit at Vignan's Institute of Information Technology (Autonomous), Duvvada, Visakhapatnam, operating under the aegis of the Ministry of Youth Affairs and Sports, Government of India.
-        </p>
-      </div>
-
-      {/* ── 2. Ideology & Emblem Grid (IIT Patna Heritage Pattern) ─────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-10 space-y-4 shadow-sm flex flex-col justify-between">
-          <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-              Ideological Motto
-            </span>
-            <h2 className="text-3xl font-extrabold text-[#1A3C29] font-serif">
-              &ldquo;NOT ME, BUT YOU&rdquo;
-            </h2>
-            <p className="text-xs sm:text-sm text-[#292D2A]/80 leading-relaxed">
-              This timeless motto expresses the core essence of democratic living and upholds the need for selfless service. An individual's genuine growth cannot be isolated from the well-being of the wider community.
-            </p>
-            <p className="text-xs sm:text-sm text-[#292D2A]/80 leading-relaxed">
-              Volunteers internalize that community service is not charity, but an educational discipline shaping character, empathy, and lifelong national responsibility.
-            </p>
-          </div>
-          <div className="pt-4 border-t border-[#292D2A]/10 text-xs font-semibold text-[#1A3C29]">
-            Principle of Shared Democratic Upliftment
-          </div>
-        </div>
-
-        <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-10 space-y-4 shadow-sm flex flex-col justify-between">
-          <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-              The National NSS Emblem
-            </span>
-            <h2 className="text-2xl font-bold text-[#1A3C29] font-serif">
-              The Konark Sun Temple Chariot Wheel
-            </h2>
-            <p className="text-xs sm:text-sm text-[#292D2A]/80 leading-relaxed">
-              The NSS emblem is based on the giant rath wheel of the world-famous Konark Sun Temple in Odisha. The wheel symbolizes creation, preservation, and release—depicting the dynamism of life and constant social transformation.
-            </p>
-            <p className="text-xs sm:text-sm text-[#292D2A]/80 leading-relaxed">
-              The 8 bars in the wheel represent the 24 hours of the day, serving as a reminder that volunteers must remain in constant readiness to serve the nation.
-            </p>
-          </div>
-          <div className="pt-4 border-t border-[#292D2A]/10 text-xs font-semibold text-[#C3A66B]">
-            Symbol of Continuous Energy & Service
-          </div>
-        </div>
-      </div>
-
-      {/* ── 3. Structural Framework & Institutional Leadership ────────── */}
-      <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-12 space-y-8 shadow-sm">
-        <div className="border-b border-[#292D2A]/10 pb-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-            Organizational Structure
-          </span>
-          <h2 className="text-3xl font-bold font-serif text-[#1A3C29] mt-1">
-            Unit Governance & Hierarchy
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-3 p-5 rounded-2xl bg-[#F5F1E8]/70 border border-[#292D2A]/5">
-            <div className="w-9 h-9 rounded-full bg-[#1A3C29] text-[#F5F1E8] flex items-center justify-center font-bold text-xs">
-              01
-            </div>
-            <h3 className="font-bold text-base text-[#1A3C29]">
-              Programme Officer & Advisory
+        <div className="space-y-10">
+          {/* Main Editorial Body */}
+          <div className="bg-white border border-ivory-300 p-8 sm:p-10 shadow-xs space-y-6 text-charcoal-800 leading-relaxed text-base sm:text-lg">
+            <h3 className="font-serif text-2xl font-bold text-forest-950">
+              The Genesis at Duvvada Campus
             </h3>
-            <p className="text-xs text-[#292D2A]/75 leading-relaxed">
-              Authorized faculty leadership liaising directly with college administration, regional directorates, and affiliating universities. Oversees compliance, budget authorizations, and official certificate reviews.
+            <p>
+              Vignan's Institute of Information Technology (Autonomous), situated adjacent to the Visakhapatnam Special Economic Zone (VSEZ) in Duvvada, was founded with a deep commitment to combining technical rigor with community empathy. Recognizing that engineering solutions cannot exist in isolation from societal realities, the VIIT NSS Cell was instituted to provide students with a living platform for civic engagement.
             </p>
+            <p className="text-charcoal-700">
+              Our volunteers undergo orientation on rural sociology, disaster management protocols, first-aid response, and public health awareness before participating in field actions, adhering to the statutory guidelines and community development objectives set forth by the National Service Scheme.
+            </p>
+
+            <div className="p-6 bg-forest-900 text-ivory-100 border-l-4 border-gold-500 my-8">
+              <h4 className="font-serif text-xl font-bold text-gold-400 mb-2">
+                The Philosophical Mandate: "Not Me, But You"
+              </h4>
+              <p className="text-sm leading-relaxed text-ivory-200">
+                This motto, adopted at the inception of the National Service Scheme in 1969 during the Mahatma Gandhi Centenary Year, reflects the ethos of democratic living and selfless service. It emphasizes that the welfare of an individual is ultimately dependent on the welfare of society as a whole.
+              </p>
+            </div>
+
+            <h3 className="font-serif text-2xl font-bold text-forest-950 pt-2">
+              National Service Scheme Statutory Framework (GoI)
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="p-5 bg-ivory-50 border border-ivory-200">
+                <h5 className="font-bold text-forest-900 text-sm uppercase tracking-wider mb-2">
+                  Regular Camping Activities (120-Hour GoI Guideline)
+                </h5>
+                <p className="text-xs sm:text-sm text-charcoal-600">
+                  National service framework outlining regular campus environmental maintenance, health awareness drives, voluntary blood donation mobilization, and non-formal literacy engagement.
+                </p>
+              </div>
+
+              <div className="p-5 bg-ivory-50 border border-ivory-200">
+                <h5 className="font-bold text-forest-900 text-sm uppercase tracking-wider mb-2">
+                  Special Residential Village Camp (7-Day GoI Guideline)
+                </h5>
+                <p className="text-xs sm:text-sm text-charcoal-600">
+                  Statutory model for residential community immersion where volunteers undertake participatory surveys, sanitation campaigns, and school mentoring modules in coordination with local village bodies.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-3 p-5 rounded-2xl bg-[#F5F1E8]/70 border border-[#292D2A]/5">
-            <div className="w-9 h-9 rounded-full bg-[#1A3C29] text-[#F5F1E8] flex items-center justify-center font-bold text-xs">
-              02
+          {/* Heritage and Resources Link Card */}
+          <div className="p-6 bg-white border border-ivory-300 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-ivory-200 text-forest-900 shrink-0">
+                <BookOpen className="w-5 h-5 text-gold-700" />
+              </div>
+              <div>
+                <h4 className="font-serif font-bold text-forest-950 text-base">
+                  NSS Heritage & Archival Resources
+                </h4>
+                <p className="text-xs text-charcoal-600">
+                  Read about the 1969 Gandhi Centenary foundation, the Konark Wheel symbolism, and national statutory manuals.
+                </p>
+              </div>
             </div>
-            <h3 className="font-bold text-base text-[#1A3C29]">
-              28-Member NSS Core Team
-            </h3>
-            <p className="text-xs text-[#292D2A]/75 leading-relaxed">
-              Executive student coordination committee partitioned into <strong>24 NSS Wing members</strong> and <strong>4 MY Bharat Cell coordinators</strong>, managing day-to-day operations and field logistics.
-            </p>
+
             <Link
-              to="/team"
-              className="text-xs font-bold text-[#1A3C29] hover:text-[#C3A66B] inline-block pt-1"
+              to="/resources"
+              className="text-xs uppercase tracking-wider font-semibold text-forest-800 hover:text-gold-700 inline-flex items-center gap-1.5 focus:outline-none shrink-0"
             >
-              View 28-Member Team Directory &rarr;
+              <span>Explore Archives</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="space-y-3 p-5 rounded-2xl bg-[#F5F1E8]/70 border border-[#292D2A]/5">
-            <div className="w-9 h-9 rounded-full bg-[#1A3C29] text-[#F5F1E8] flex items-center justify-center font-bold text-xs">
-              03
+          {/* Gated Registration Banner */}
+          <div className="pt-2">
+            <ClosedRegistrationBanner />
+          </div>
+
+          {/* Institutional Affiliation Bar */}
+          <div className="p-6 bg-forest-950 text-ivory-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <img
+                src={siteConfig.logos.nss}
+                alt="NSS Emblem"
+                className="w-11 h-11 object-contain bg-white rounded-full p-1 shrink-0"
+              />
+              <div>
+                <h4 className="font-serif text-base sm:text-lg font-bold text-ivory-50">
+                  Autonomous Governance & Advisory
+                </h4>
+                <p className="text-xs text-ivory-300">
+                  Affiliated to Jawaharlal Nehru Technological University Gurajada Vizianagaram (JNTUGV)
+                </p>
+              </div>
             </div>
-            <h3 className="font-bold text-base text-[#1A3C29]">
-              Student Volunteer Body
-            </h3>
-            <p className="text-xs text-[#292D2A]/75 leading-relaxed">
-              Approved student volunteers enrolled across three pathways: NSS Only, MY Bharat Only, or Both. Each serves a two-year tenure with audited session attendance and distinct service-hour ledgers.
-            </p>
+
+            <Link
+              to="/"
+              className="px-5 py-2.5 bg-gold-500 text-forest-950 text-xs font-semibold uppercase tracking-wider hover:bg-gold-400 shrink-0"
+            >
+              Back to Portal Home
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* ── 4. Unit Exclusions & Safeguards ────────────────────────────── */}
-      <div className="p-6 rounded-2xl bg-[#1A3C29]/5 border border-[#1A3C29]/15 text-xs text-[#292D2A]/80 space-y-2">
-        <h3 className="font-bold text-[#1A3C29] text-sm">
-          Autonomous Unit Boundaries & SAC Exclusions
-        </h3>
-        <p className="leading-relaxed">
-          NSS VIIT (A) operates strictly as an autonomous public service unit under central National Service Scheme directives. Student Activity Council (SAC) links, modules, and governance are completely excluded from this website.
-        </p>
       </div>
-
-      <ClosedRegistrationBanner />
     </div>
-  )
+  );
 }

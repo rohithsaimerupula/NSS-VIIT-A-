@@ -1,164 +1,143 @@
-import { useEffect, type ReactElement } from 'react'
-import { Breadcrumb } from '@/components/Breadcrumb'
-import { PUBLIC_RESOURCES } from '@/lib/data'
+import { useEffect, type ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SectionHeading } from '../components/ui/SectionHeading';
+import { BackButton } from '../components/ui/BackButton';
+import { heritagePublications } from '../config/contentConfig';
+import { Landmark, FileCheck, BookOpen, Quote, Shield } from 'lucide-react';
+import { ClosedRegistrationBanner } from '../components/ClosedRegistrationBanner';
 
 export function ResourcesPage(): ReactElement {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    document.title = 'Heritage & Official Resources | NSS VIIT (A)'
-  }, [])
+    document.title = 'Heritage & Official Resources | NSS VIIT (A)';
+  }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb currentTitle="Heritage & Resources" />
-
-      {/* ── 1. Page Header (IIT Patna Style Resource Hub) ────────────── */}
-      <div className="border-b border-[#292D2A]/10 pb-8 space-y-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#1A3C29]" aria-hidden="true" />
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-            Official Guidelines, Handbooks & Anthem
-          </span>
+    <div className="py-16 bg-ivory-100 text-charcoal-900 min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="mb-8">
+          <BackButton onBack={() => { void navigate('/'); }} label="Back to Home" />
         </div>
 
-        <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1A3C29] leading-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          Heritage & Resources
-        </h1>
+        <SectionHeading
+          eyebrow="Historical Doctrine & Compendiums"
+          title="NSS Heritage & Archival Records"
+          subtitle="Explore the founding origins of the National Service Scheme from 1969 alongside official statutory publications and policy handbooks."
+        />
 
-        <p className="text-base sm:text-lg text-[#292D2A]/80 max-w-4xl leading-relaxed">
-          The official repository of verified National Service Scheme doctrine, Ministry guidelines, the Konark Wheel symbolism, and approved campus circulars for NSS VIIT (A) and the MY Bharat Cell.
-        </p>
-      </div>
-
-      {/* ── 2. Official National Pledge & Anthem (IIT Patna Heritage Pattern) ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-10 space-y-5 shadow-sm">
-          <div className="flex items-center justify-between border-b border-[#292D2A]/10 pb-3">
-            <h2 className="text-2xl font-bold font-serif text-[#1A3C29]">
-              The National NSS Pledge
-            </h2>
-            <span className="text-[11px] font-bold text-[#C3A66B] uppercase tracking-wider">
-              Solemn Commitment
-            </span>
-          </div>
-
-          <div className="bg-[#F5F1E8] p-6 rounded-2xl border-l-4 border-[#1A3C29] space-y-3 font-serif text-xs sm:text-sm text-[#292D2A]/90 leading-relaxed italic">
-            <p>
-              &ldquo;We, the volunteers of the National Service Scheme, solemnly pledge that we will be ever ready for the service of the nation.&rdquo;
-            </p>
-            <p>
-              &ldquo;We will perform community service selflessly without distinction of caste, creed, religion, or language. We shall uphold dignity of manual labor and strive for democratic equality.&rdquo;
-            </p>
-            <p className="font-bold not-italic text-[#1A3C29]">
-              &ldquo;NOT ME, BUT YOU&rdquo;
-            </p>
-          </div>
-          <p className="text-xs text-[#292D2A]/60">
-            Administered at all official inductions and institutional commemorative observances.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-10 space-y-5 shadow-sm">
-          <div className="flex items-center justify-between border-b border-[#292D2A]/10 pb-3">
-            <h2 className="text-2xl font-bold font-serif text-[#1A3C29]">
-              NSS Anthem Philosophy
-            </h2>
-            <span className="text-[11px] font-bold text-[#C3A66B] uppercase tracking-wider">
-              National Ethos
-            </span>
-          </div>
-
-          <div className="bg-[#F5F1E8] p-6 rounded-2xl border-l-4 border-[#C3A66B] space-y-3 font-serif text-xs sm:text-sm text-[#292D2A]/90 leading-relaxed italic">
-            <p>
-              &ldquo;Uthe Samaj Ke Liye Uthe, Jage Swarashtra Ke Liye Jage...&rdquo;
-            </p>
-            <p>
-              The official NSS song embodies the awakening of national consciousness through constructive youth labor, village upliftment, and solidarity with the marginalized.
-            </p>
-          </div>
-          <p className="text-xs text-[#292D2A]/60">
-            Sung at morning assemblies during special rural camps and state youth festivals.
-          </p>
-        </div>
-      </div>
-
-      {/* ── 3. Official Downloadable Publications (IIT Patna Resource Table) ── */}
-      <div className="bg-white rounded-3xl border border-[#292D2A]/10 p-8 sm:p-12 shadow-sm space-y-8">
-        <div className="border-b border-[#292D2A]/10 pb-4 space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C3A66B]">
-            Official Publications Catalogue
-          </span>
-          <h2 className="text-3xl font-bold font-serif text-[#1A3C29]">
-            Manuals, Circulars & Handbooks
-          </h2>
-          <div className="p-3.5 rounded-xl bg-[#C3A66B]/15 border border-[#C3A66B]/40 text-xs text-[#1A3C29] flex items-start gap-2.5 mt-2">
-            <span className="font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-[#C3A66B]/30 shrink-0">
-              Notice
-            </span>
-            <p className="leading-relaxed">
-              The entries below represent the approved institutional publication catalogue. Downloadable PDF files will be linked once the Programme Officer verifies and uploads final authenticated copies to object storage.
-            </p>
-          </div>
-        </div>
-
-        <div className="divide-y divide-[#292D2A]/10">
-          {PUBLIC_RESOURCES.map((res) => (
-            <div
-              key={res.id}
-              className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-[#F5F1E8]/30 px-4 rounded-2xl transition-colors"
-            >
-              <div className="space-y-2 max-w-2xl">
-                <div className="flex items-center gap-2.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#1A3C29]/10 text-[#1A3C29] border border-[#1A3C29]/20">
-                    {res.category}
-                  </span>
-                  <span className="text-xs text-[#292D2A]/60 font-mono">
-                    {res.fileType} &bull; {res.fileSize}
-                  </span>
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#1A3C29]">
-                  {res.title}
-                </h3>
-                <p className="text-xs text-[#292D2A]/75 leading-relaxed">
-                  {res.description}
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+          
+          {/* Historical Genesis Card */}
+          <div className="md:col-span-5 bg-white border border-ivory-300 p-8 shadow-xs space-y-5">
+            <div className="flex items-center gap-3 border-b border-ivory-200 pb-4">
+              <div className="p-2.5 bg-forest-50 text-forest-800 border border-ivory-200">
+                <Landmark className="w-6 h-6" />
               </div>
-
-              <div className="shrink-0 flex items-center gap-4">
-                <span className="text-xs text-[#292D2A]/50 font-medium">
-                  {res.publishedDate}
+              <div>
+                <span className="text-[11px] text-gold-700 font-mono uppercase tracking-wider block font-semibold">
+                  Genesis: 1969 Centenary
                 </span>
-                <button
-                  type="button"
-                  disabled
-                  title="Document upload pending administrative sign-off"
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-[#1A3C29]/15 text-[#1A3C29]/70 border border-[#1A3C29]/20 cursor-not-allowed"
-                >
-                  Download (Pending Upload)
-                </button>
+                <h3 className="font-serif text-xl font-bold text-forest-950">
+                  Mahatma Gandhi Centenary
+                </h3>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* ── 4. Konark Wheel Ideological Breakdown ─────────────────────── */}
-      <div className="bg-[#1A3C29] text-[#F5F1E8] rounded-3xl p-8 sm:p-12 border-2 border-[#C3A66B] shadow-xl space-y-6">
-        <h2 className="text-2xl sm:text-3xl font-bold font-serif text-[#F5F1E8]">
-          The Symbol of the Konark Sun Chariot
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm text-[#F5F1E8]/85 leading-relaxed">
-          <p>
-            The Konark Wheel portrays the cycle of creation, preservation, and release. It signifies movement in life through time and space. The design implies continuous endeavor for social change and youth progress.
-          </p>
-          <p>
-            The red color in the badge indicates that the volunteer is full of young blood that is lively, active, energetic, and full of high spirit. The navy blue color indicates the cosmos of which the NSS is tiny part, ready to contribute its share for the welfare of mankind.
-          </p>
+            <p className="text-sm text-charcoal-700 leading-relaxed font-normal">
+              Formally initiated on <strong className="text-forest-950 font-semibold">September 24, 1969</strong> during Mahatma Gandhi's birth centenary year under Union Education Minister Dr. V.K.R.V. Rao, the National Service Scheme was founded on a democratic premise: higher education must never remain detached from community welfare and rural realities.
+            </p>
+
+            <div className="p-4 bg-ivory-50 border-l-4 border-gold-600 text-xs text-charcoal-700 space-y-1.5">
+              <div className="flex items-center gap-1.5 text-forest-900 font-semibold uppercase tracking-wider">
+                <Quote className="w-3.5 h-3.5 text-gold-700" />
+                <span>The Democratic Core</span>
+              </div>
+              <p className="leading-relaxed">
+                "Not Me, But You" reinforces that personal welfare is inseparable from collective community upliftment.
+              </p>
+            </div>
+
+            <p className="text-xs text-charcoal-600 italic leading-relaxed">
+              At Vignan's Institute of Information Technology (Autonomous), the NSS unit carries forward this national mandate through student civic responsibility, environmental care, and community partnership in Duvvada.
+            </p>
+
+            {/* National NSS Pledge */}
+            <div className="pt-4 border-t border-ivory-200 space-y-2">
+              <h4 className="font-serif font-bold text-forest-950 text-base">
+                The National NSS Pledge
+              </h4>
+              <div className="bg-ivory-50 p-4 border border-ivory-200 text-xs text-charcoal-700 italic space-y-2 leading-relaxed">
+                <p>
+                  &ldquo;We, the volunteers of the National Service Scheme, solemnly pledge that we will be ever ready for the service of the nation.&rdquo;
+                </p>
+                <p>
+                  &ldquo;We will perform community service selflessly without distinction of caste, creed, religion, or language. We shall strive for democratic equality.&rdquo;
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Archival Publications & Guidelines */}
+          <div className="md:col-span-7 space-y-4">
+            <div className="flex items-center justify-between border-b border-ivory-300 pb-2">
+              <h4 className="text-xs uppercase font-semibold tracking-wider text-forest-950 flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-forest-800" />
+                <span>Archival Compendiums & Guidelines</span>
+              </h4>
+              <span className="text-[11px] text-charcoal-500 font-mono">Official Reference Registry</span>
+            </div>
+
+            {heritagePublications.map((pub) => (
+              <div
+                key={pub.id}
+                className="p-6 bg-white border border-ivory-300 shadow-xs hover:border-gold-500/70 hover:shadow-subtle transition-all space-y-3"
+              >
+                <div className="flex justify-between items-center text-xs">
+                  <span className="text-gold-700 font-mono font-semibold">{pub.publicationYear}</span>
+                  <span className="px-2.5 py-0.5 bg-ivory-200/80 text-forest-900 text-[10px] uppercase font-semibold tracking-wider border border-ivory-300">
+                    {pub.status}
+                  </span>
+                </div>
+
+                <h5 className="font-serif text-lg font-bold text-forest-950">
+                  {pub.title}
+                </h5>
+
+                <p className="text-xs text-charcoal-600 leading-relaxed font-normal">
+                  {pub.description}
+                </p>
+
+                <div className="pt-3 border-t border-ivory-200/70 text-[11px] text-charcoal-500 flex items-center gap-2">
+                  <FileCheck className="w-3.5 h-3.5 text-forest-800 shrink-0" />
+                  <span>Category: {pub.type} • Official Repository Reference</span>
+                </div>
+              </div>
+            ))}
+
+            {/* Statutory Compliance Callout */}
+            <div className="p-6 bg-forest-900 text-ivory-100 border-l-4 border-gold-500 shadow-xs space-y-2 mt-6">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-gold-400" />
+                <h5 className="font-serif font-bold text-base text-gold-400">
+                  Statutory Reference Manuals
+                </h5>
+              </div>
+              <p className="text-xs text-ivory-200 leading-relaxed">
+                The National Service Scheme Manual issued by the Ministry of Youth Affairs and Sports serves as the primary governing text for volunteer hour accounting, advisory committee meetings, and university integration with JNTUGV Vizianagaram.
+              </p>
+            </div>
+          </div>
+
         </div>
+
+        {/* Closed Registration Banner */}
+        <div className="mb-8">
+          <ClosedRegistrationBanner />
+        </div>
+
       </div>
     </div>
-  )
+  );
 }
